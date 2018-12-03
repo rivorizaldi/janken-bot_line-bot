@@ -79,8 +79,8 @@ class Webhook extends CI_Controller {
       $profile = $res->getJSONDecodedBody();
  
       // create welcome message
-      $message  = "Salam kenal, " . $profile['displayName'] . "!\n";
-      $message .= "Silakan kirim pesan \"MULAI\" untuk memulai kuis.";
+      $message  = "Hai, " . $profile['displayName'] . "!\n";
+      $message .= "Silakan kirim pesan \"MULAI\" untuk memulai kuis. 0x100078";
       $textMessageBuilder = new TextMessageBuilder($message);
  
       // create sticker message
