@@ -77,9 +77,16 @@ class Webhook extends CI_Controller {
     if ($res->isSucceeded())
     {
       $profile = $res->getJSONDecodedBody();
- 
+      
+      $code = '100078';
+
+      $bin =  hex2bin(str_repeat('0', 8 - strlen($code) . $code));
+
+      $emoticon = mb_convert_encoding($bin, 'UTF-8', 'UTF-32BE');
+
+
       // create welcome message
-      $message  = "Hai, " . $profile['displayName'] . "!\n";
+      $message  = "Hai, " . $emoticon . $profile['displayName'] . "!\n";
       $message .= "Silakan kirim pesan \"MULAI\" untuk memulai kuis. 0x100078";
       $textMessageBuilder = new TextMessageBuilder($message);
  
