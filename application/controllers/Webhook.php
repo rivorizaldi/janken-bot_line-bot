@@ -15,6 +15,9 @@ class Webhook extends CI_Controller {
   private $events;
   private $signature;
   private $user;
+  private $code;
+  private $bin;
+  private $emoticon;
 
   function __construct()
   {
@@ -78,16 +81,16 @@ class Webhook extends CI_Controller {
     {
       $profile = $res->getJSONDecodedBody();
       
-      // $code = '100078';
+      $this->code = '100078';
 
-      // $bin =  hex2bin(str_repeat('0', 8 - strlen($code) . $code));
+      $this->bin =  hex2bin(str_repeat('0', 8 - strlen($code) . $code));
 
-      // $emoticon = mb_convert_encoding($bin, 'UTF-8', 'UTF-32BE');
+      $this->emoticon = mb_convert_encoding($bin, 'UTF-8', 'UTF-32BE');
 
 
       // create welcome message
-      $message  = "Hai, " . $emoticon . $profile['displayName'] . "!\n";
-      $message .= "Silakan kirim pesan \"MULAI\" untuk memulai kuis. 0x100078";
+      $message  = "Hai, " . $this->emoticon . $profile['displayName'] . "!\n";
+      $message .= "Silakan kirim pesan \"MULAI\" untuk memulai kuis.";
       $textMessageBuilder = new TextMessageBuilder($message);
  
       // create sticker message
