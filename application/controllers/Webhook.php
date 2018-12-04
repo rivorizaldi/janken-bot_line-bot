@@ -78,11 +78,11 @@ class Webhook extends CI_Controller {
     {
       $profile = $res->getJSONDecodedBody();
       
-      $code = '100078';
+      // $code = '100078';
 
-      $bin =  hex2bin(str_repeat('0', 8 - strlen($code) . $code));
+      // $bin =  hex2bin(str_repeat('0', 8 - strlen($code) . $code));
 
-      $emoticon = mb_convert_encoding($bin, 'UTF-8', 'UTF-32BE');
+      // $emoticon = mb_convert_encoding($bin, 'UTF-8', 'UTF-32BE');
 
 
       // create welcome message
