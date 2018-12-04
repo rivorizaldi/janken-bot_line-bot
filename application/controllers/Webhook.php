@@ -85,7 +85,7 @@ class Webhook extends CI_Controller {
       $message  = "Hai, " . $profile['displayName'] . "!\n";
       $message2 = "Pilih Opsi 1. Mulai Bermain, untuk memulai permainan.\n";
       $message2 .= "pilih Opsi 2. Panduan, untuk mengetahui tata cara permainan.\n";
-      $message2 .= "Selamat Bermain! ";
+      $message2 .= "Selamat Bermain! " . $code;
       $textMessageBuilder = new TextMessageBuilder($message);
       $textMessageBuilder2 = new TextMessageBuilder($message2);
  
