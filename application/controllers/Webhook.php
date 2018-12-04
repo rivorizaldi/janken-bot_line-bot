@@ -83,10 +83,11 @@ class Webhook extends CI_Controller {
 
       // create welcome message
       $message  = "Hai, " . $profile['displayName'] . "!\n";
-      $message .= "Pilih Opsi 1. Mulai Bermain, untuk memulai permainan.\n";
-      $message .= "pilih Opsi 2. Panduan, untuk mengetahui tata cara permainan.\n";
-      $message .= "Selamat Bermain! ";
+      $message2 = "Pilih Opsi 1. Mulai Bermain, untuk memulai permainan.\n";
+      $message2 .= "pilih Opsi 2. Panduan, untuk mengetahui tata cara permainan.\n";
+      $message2 .= "Selamat Bermain! ";
       $textMessageBuilder = new TextMessageBuilder($message);
+      $textMessageBuilder2 = new TextMessageBuilder($message2);
  
       // create sticker message
       $stickerMessageBuilder = new StickerMessageBuilder(1, 106);
@@ -95,6 +96,7 @@ class Webhook extends CI_Controller {
       $multiMessageBuilder = new MultiMessageBuilder();
       $multiMessageBuilder->add($textMessageBuilder);
       $multiMessageBuilder->add($stickerMessageBuilder);
+      $multiMessageBuilder->add($textMessageBuilder2);
  
       // send reply message
       $this->bot->replyMessage($event['replyToken'], $multiMessageBuilder);
