@@ -80,14 +80,10 @@ class Webhook extends CI_Controller {
       
       $code = '100078';
 
-      $bin =  hex2bin(str_repeat('0', 8 - strlen($code) . $code));
-
-      $emoticon = mb_convert_encoding($bin, 'UTF-8', 'UTF-32BE');
-
 
       // create welcome message
       $message  = "Hai, " . $profile['displayName'] . "!\n";
-      $message .= "Silakan kirim pesan \"MULAI\" untuk". $emoticon ." memulai kuis.";
+      $message .= "Silakan kirim pesan \"MULAI\" untuk". $code ." memulai kuis.";
       $textMessageBuilder = new TextMessageBuilder($message);
  
       // create sticker message
