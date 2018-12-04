@@ -78,7 +78,7 @@ class Webhook extends CI_Controller {
     {
       $profile = $res->getJSONDecodedBody();
       
-      $code = json_decode('"\uDBC0\uDC84"');
+      $code = json_decode('"\uDBC0\uDC78"');
 
 
       // create welcome message
