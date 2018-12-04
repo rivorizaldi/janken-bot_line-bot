@@ -78,14 +78,14 @@ class Webhook extends CI_Controller {
     {
       $profile = $res->getJSONDecodedBody();
       
-      $code = "\u{100078}";
+      $code = "\u{10008F}";
 
 
       // create welcome message
       $message  = "Hai, " . $profile['displayName'] . "!\n";
-      $message .= "Pilih Opsi 1. Mulai Bermain, untuk memulai permainan\n";
-      $message .= "pilih Opsi 2. Panduan, untuk mengetahui tata cara permainan\n";
-      $message .= "Selamat Bermain ";
+      $message .= "Pilih Opsi 1. Mulai Bermain, untuk memulai permainan.\n";
+      $message .= "pilih Opsi 2. Panduan, untuk mengetahui tata cara permainan.\n";
+      $message .= "Selamat Bermain! ";
       $textMessageBuilder = new TextMessageBuilder($message);
  
       // create sticker message
