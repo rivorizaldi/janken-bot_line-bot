@@ -88,19 +88,19 @@ class Webhook extends CI_Controller {
       $message2 .= "Selamat Bermain! " . $code;
       $textMessageBuilder = new TextMessageBuilder($message);
       $textMessageBuilder2 = new TextMessageBuilder($message2);
- 
+
       // create sticker message
       $stickerMessageBuilder = new StickerMessageBuilder(1, 106);
- 
+
       // merge all message
       $multiMessageBuilder = new MultiMessageBuilder();
       $multiMessageBuilder->add($textMessageBuilder);
       $multiMessageBuilder->add($stickerMessageBuilder);
       $multiMessageBuilder->add($textMessageBuilder2);
- 
+
       // send reply message
       $this->bot->replyMessage($event['replyToken'], $multiMessageBuilder);
- 
+
       // save user data
       $this->tebakkode_m->saveUser($profile);
     }
@@ -168,8 +168,8 @@ class Webhook extends CI_Controller {
   }
 
   private function checkAnswer($message, $replyToken){
-     // if answer is true, increment score
-     if($this->tebakkode_m->isAnswerEqual($this->user['number'], $message)){
+    // if answer is true, increment score
+    if($this->tebakkode_m->isAnswerEqual($this->user['number'], $message)){
       $this->user['score']++;
       $this->tebakkode_m->setScore($this->user['user_id'], $this->user['score']);
     }
@@ -177,7 +177,7 @@ class Webhook extends CI_Controller {
     if($this->user['number'] < 10)
     {
       // update number progress
-     $this->tebakkode_m->setUserProgress($this->user['user_id'], $this->user['number'] + 1);
+    $this->tebakkode_m->setUserProgress($this->user['user_id'], $this->user['number'] + 1);
  
       // send next question
       $this->sendQuestion($replyToken, $this->user['number'] + 1);
