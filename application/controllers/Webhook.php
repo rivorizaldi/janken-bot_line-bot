@@ -79,14 +79,22 @@ class Webhook extends CI_Controller {
       $profile = $res->getJSONDecodedBody();
       
       $code = "\u{10008F}";
+      
+      $opsi = array (
+        "1. Mulai Bermain" => "1. Mulai Bermain",
+        "2. Panduan" => "2. Panduan",
+        "title" => "",
+        "text" => "",
+        "image" => "https://res.cloudinary.com/db9zavtws/image/upload/v1486219056/1_rgnadm.png"
+      );
 
-    // $options[] = new MessageTemplateActionBuilder($question['option_'.$opsi], $question['option_'.$opsi]);
- 
-    // // prepare button template
-    // $buttonTemplate = new ButtonTemplateBuilder($question['number']."/10", $question['text'], $question['image'], $options);
- 
-    // // build message
-    // $messageBuilder = new TemplateMessageBuilder("Gunakan mobile app untuk melihat soal", $buttonTemplate);
+      $options[] = new MessageTemplateActionBuilder($opsi['1. Mulai Bermain'], $opsi['2. Panduan']);
+  
+      // prepare button template
+      $buttonTemplate = new ButtonTemplateBuilder($opsi['title'], $opsi['text'], $opsi['image'], $options);
+  
+      // build message
+      $messageBuilder = new TemplateMessageBuilder("Gunakan mobile app untuk melihat soal", $buttonTemplate);
 
       // create welcome message
       $message  = "Hai, " . $profile['displayName'] . "!\n";
@@ -104,6 +112,8 @@ class Webhook extends CI_Controller {
       $multiMessageBuilder->add($textMessageBuilder);
       $multiMessageBuilder->add($stickerMessageBuilder);
       $multiMessageBuilder->add($textMessageBuilder2);
+      $multiMessageBuilder->add($messageBuilder);
+
 
       // send reply message
       $this->bot->replyMessage($event['replyToken'], $multiMessageBuilder);
