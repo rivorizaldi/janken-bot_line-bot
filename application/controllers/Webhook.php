@@ -94,19 +94,19 @@ class Webhook extends CI_Controller {
       $message  = "Hai, " . $profile['displayName'] . "!\n";
       $message2 = "Pilih Opsi 1. Mulai Bermain, untuk memulai permainan.\n";
       $message2 .= "pilih Opsi 2. Panduan, untuk mengetahui tata cara permainan.\n";
-      // $message2 .= "Selamat Bermain! " . $code;
-      // $textMessageBuilder = new TextMessageBuilder($message);
-      // $textMessageBuilder2 = new TextMessageBuilder($message2);
+      $message2 .= "Selamat Bermain! " . $code;
+      $textMessageBuilder = new TextMessageBuilder($message);
+      $textMessageBuilder2 = new TextMessageBuilder($message2);
 
-      // // create sticker message
-      // $stickerMessageBuilder = new StickerMessageBuilder(1, 106);
+      // create sticker message
+      $stickerMessageBuilder = new StickerMessageBuilder(1, 106);
 
-      // // merge all message
-      // $multiMessageBuilder = new MultiMessageBuilder();
-      // $multiMessageBuilder->add($textMessageBuilder);
-      // $multiMessageBuilder->add($stickerMessageBuilder);
-      // $multiMessageBuilder->add($textMessageBuilder2);
-      // $multiMessageBuilder->add($messageBuilder);
+      // merge all message
+      $multiMessageBuilder = new MultiMessageBuilder();
+      $multiMessageBuilder->add($textMessageBuilder);
+      $multiMessageBuilder->add($stickerMessageBuilder);
+      $multiMessageBuilder->add($textMessageBuilder2);
+      $multiMessageBuilder->add($messageBuilder);
 
 
       // send reply message
