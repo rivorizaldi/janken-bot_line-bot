@@ -80,18 +80,12 @@ class Webhook extends CI_Controller {
       
       $code = "\u{10008F}";
       
-      $opsi = array (
-        "1. Mulai Bermain" => "1. Mulai Bermain",
-        "2. Panduan" => "2. Panduan",
-        "title" => "",
-        "text" => "",
-        "image" => "https://res.cloudinary.com/db9zavtws/image/upload/v1486219056/1_rgnadm.png"
-      );
 
-      $options[] = new MessageTemplateActionBuilder($opsi['1. Mulai Bermain'], $opsi['2. Panduan']);
+
+      $options[] = new MessageTemplateActionBuilder('1. Mulai Bermain','1. Mulai Bermain');
   
       // prepare button template
-      $buttonTemplate = new ButtonTemplateBuilder($opsi['title'], $opsi['text'], $opsi['image'], $options);
+      $buttonTemplate = new ButtonTemplateBuilder('title', 'text', 'https://res.cloudinary.com/db9zavtws/image/upload/v1486219056/1_rgnadm.png', $options);
   
       // build message
       $messageBuilder = new TemplateMessageBuilder("Gunakan mobile app untuk melihat soal", $buttonTemplate);
@@ -100,23 +94,23 @@ class Webhook extends CI_Controller {
       $message  = "Hai, " . $profile['displayName'] . "!\n";
       $message2 = "Pilih Opsi 1. Mulai Bermain, untuk memulai permainan.\n";
       $message2 .= "pilih Opsi 2. Panduan, untuk mengetahui tata cara permainan.\n";
-      $message2 .= "Selamat Bermain! " . $code;
-      $textMessageBuilder = new TextMessageBuilder($message);
-      $textMessageBuilder2 = new TextMessageBuilder($message2);
+      // $message2 .= "Selamat Bermain! " . $code;
+      // $textMessageBuilder = new TextMessageBuilder($message);
+      // $textMessageBuilder2 = new TextMessageBuilder($message2);
 
-      // create sticker message
-      $stickerMessageBuilder = new StickerMessageBuilder(1, 106);
+      // // create sticker message
+      // $stickerMessageBuilder = new StickerMessageBuilder(1, 106);
 
-      // merge all message
-      $multiMessageBuilder = new MultiMessageBuilder();
-      $multiMessageBuilder->add($textMessageBuilder);
-      $multiMessageBuilder->add($stickerMessageBuilder);
-      $multiMessageBuilder->add($textMessageBuilder2);
-      $multiMessageBuilder->add($messageBuilder);
+      // // merge all message
+      // $multiMessageBuilder = new MultiMessageBuilder();
+      // $multiMessageBuilder->add($textMessageBuilder);
+      // $multiMessageBuilder->add($stickerMessageBuilder);
+      // $multiMessageBuilder->add($textMessageBuilder2);
+      // $multiMessageBuilder->add($messageBuilder);
 
 
       // send reply message
-      $response = $this->bot->replyMessage($event['replyToken'], $messageBuilder);
+      $result = $this->bot->replyMessage($event['replyToken'], $messageBuilder);
 
       // save user data
       $this->tebakkode_m->saveUser($profile);
