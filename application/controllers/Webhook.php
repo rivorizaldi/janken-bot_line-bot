@@ -116,7 +116,7 @@ class Webhook extends CI_Controller {
 
 
       // send reply message
-      $this->bot->replyMessage($event['replyToken'], $messageBuilder);
+      $response = $this->bot->replyMessage($event['replyToken'], $messageBuilder);
 
       // save user data
       $this->tebakkode_m->saveUser($profile);
