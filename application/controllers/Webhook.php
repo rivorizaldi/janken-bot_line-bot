@@ -127,7 +127,12 @@ class Webhook extends CI_Controller {
         // send question no.1
         $this->sendQuestion($event['replyToken'], 1);
       } else {
-        $message = 'Silakan kirim pesan "MULAI" untuk memulai kuis.';
+        $code = "\u{10008F}";
+
+        $message = "Pilih Opsi 1. Mulai Bermain, untuk memulai permainan.\n";
+        $message .= "pilih Opsi 2. Panduan, untuk mengetahui tata cara permainan.\n";
+        $message .= "Selamat Bermain! " . $code;
+
         $textMessageBuilder = new TextMessageBuilder($message);
         $this->bot->replyMessage($event['replyToken'], $textMessageBuilder);
       }
