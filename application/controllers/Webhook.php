@@ -80,6 +80,13 @@ class Webhook extends CI_Controller {
       
       $code = "\u{10008F}";
 
+    // $options[] = new MessageTemplateActionBuilder($question['option_'.$opsi], $question['option_'.$opsi]);
+ 
+    // // prepare button template
+    // $buttonTemplate = new ButtonTemplateBuilder($question['number']."/10", $question['text'], $question['image'], $options);
+ 
+    // // build message
+    // $messageBuilder = new TemplateMessageBuilder("Gunakan mobile app untuk melihat soal", $buttonTemplate);
 
       // create welcome message
       $message  = "Hai, " . $profile['displayName'] . "!\n";
@@ -110,6 +117,7 @@ class Webhook extends CI_Controller {
     $userMessage = $event['message']['text'];
     if($this->user['number'] == 0)
     {
+      
       if(strtolower($userMessage) == 'mulai')
       {
         // reset score
