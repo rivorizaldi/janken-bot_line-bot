@@ -171,7 +171,7 @@ class Webhook extends CI_Controller {
     // prepare answer options
     for($opsi = "a"; $opsi <= "d"; $opsi++) {
         if(!empty($question['option_'.$opsi]))
-            $options[] = new MessageTemplateActionBuilder($question['option_'.$opsi], $question['option_'.$opsi]);
+            $options = new MessageTemplateActionBuilder($question['option_'.$opsi], $question['option_'.$opsi]);
     }
  
     // prepare button template
