@@ -91,7 +91,7 @@ class Webhook extends CI_Controller {
       } 
 
       // prepare button template
-      $buttonTemplate = new ButtonTemplateBuilder(null, 'Janken-Bot Game'.$code['Gunting'], null, $options);
+      $buttonTemplate = new ButtonTemplateBuilder(null, 'Janken-Bot Game \uDBC0\uDC84', null, $options);
   
       // build message
       $messageBuilder = new TemplateMessageBuilder("Gunakan mobile app untuk melihat soal", $buttonTemplate);
