@@ -88,7 +88,7 @@ class Webhook extends CI_Controller {
       // }
   
       // prepare button template
-      $buttonTemplate = new ButtonTemplateBuilder('test', 'test', 'https://res.cloudinary.com/db9zavtws/image/upload/v1486219056/1_rgnadm.png', [new MessageTemplateActionBuilder('test','test')]);
+      $buttonTemplate = new ButtonTemplateBuilder(null, 'test', null, [new MessageTemplateActionBuilder('test','test')]);
   
       // build message
       $messageBuilder = new TemplateMessageBuilder("Gunakan mobile app untuk melihat soal", $buttonTemplate);
