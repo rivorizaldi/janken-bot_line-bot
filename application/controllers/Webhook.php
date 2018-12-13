@@ -80,15 +80,15 @@ class Webhook extends CI_Controller {
       
       $code = "\u{10008F}";
 
-      $opsi = ["1. Mulai Bermain","2. Panduan"];
-      $length = count($opsi);
+      // $opsi = ["1. Mulai Bermain","2. Panduan"];
+      // $length = count($opsi);
 
-      for($i = 0; $i<$length; $i++){
-        $options[] = new MessageTemplateActionBuilder($opsi[$i],$opsi[$i]);
-      }
+      // for($i = 0; $i<$length; $i++){
+      //   $options[] = new MessageTemplateActionBuilder($opsi[$i],$opsi[$i]);
+      // }
   
       // prepare button template
-      $buttonTemplate = new ButtonTemplateBuilder('', '', 'https://res.cloudinary.com/db9zavtws/image/upload/v1486219056/1_rgnadm.png', $options);
+      $buttonTemplate = new ButtonTemplateBuilder('', '', 'https://res.cloudinary.com/db9zavtws/image/upload/v1486219056/1_rgnadm.png', [new MessageTemplateActionBuilder('test','test')]);
   
       // build message
       $messageBuilder = new TemplateMessageBuilder("Gunakan mobile app untuk melihat soal", $buttonTemplate);
