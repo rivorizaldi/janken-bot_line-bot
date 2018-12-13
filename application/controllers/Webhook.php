@@ -83,11 +83,11 @@ class Webhook extends CI_Controller {
                     "Batu" => "\u{100031}",
                     "Kertas" => "\u{100032}");
 
-      $opsi = ["\u{100031}","2. Panduan"];
+      $opsi = ["1. Mulai Bermain","2. Panduan"];
       $length = count($opsi);
 
       for($i = 0; $i<$length; $i++){
-        $options[] = new MessageTemplateActionBuilder($opsi[$i],$opsi[$i]);
+        $options[] = new MessageTemplateActionBuilder($opsi[$i],$code["wink"]);
       } 
 
       // prepare button template
