@@ -83,7 +83,7 @@ class Webhook extends CI_Controller {
                     "Batu" => "\u{100031}",
                     "Kertas" => "\u{100032}");
 
-      $opsi = ["1. Mulai Bermain","2. Panduan"];
+      $opsi = ["\u{100031}","2. Panduan"];
       $length = count($opsi);
 
       for($i = 0; $i<$length; $i++){
@@ -91,7 +91,7 @@ class Webhook extends CI_Controller {
       } 
 
       // prepare button template
-      $buttonTemplate = new ButtonTemplateBuilder(null, 'Janken-Bot Game \uDBC0\uDC84', null, $options);
+      $buttonTemplate = new ButtonTemplateBuilder(null, 'Janken-Bot Game!', null, $options);
   
       // build message
       $messageBuilder = new TemplateMessageBuilder("Gunakan mobile app untuk melihat soal", $buttonTemplate);
@@ -100,7 +100,7 @@ class Webhook extends CI_Controller {
       $message  = "Hai, " . $profile['displayName'] . "!\n";
       $message2 = "Pilih Opsi 1. Mulai Bermain, untuk memulai permainan.\n";
       $message2 .= "pilih Opsi 2. Panduan, untuk mengetahui tata cara permainan.\n";
-      $message2 .= "Selamat Bermain! " . $code["wink"].$code['Gunting'].$code['Gunting'];
+      $message2 .= "Selamat Bermain! " . $code["wink"];
       $textMessageBuilder = new TextMessageBuilder($message);
       $textMessageBuilder2 = new TextMessageBuilder($message2);
 
