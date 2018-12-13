@@ -81,8 +81,9 @@ class Webhook extends CI_Controller {
       $code = "\u{10008F}";
 
       $opsi = ["1. Mulai Bermain","2. Panduan"];
+      $length = count($opsi);
 
-      for($i = 0; $i<$opsi.length; $i++){
+      for($i = 0; $i<$length; $i++){
         $options[] = new MessageTemplateActionBuilder($opsi[$i]);
       }
   
