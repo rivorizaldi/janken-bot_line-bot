@@ -79,13 +79,15 @@ class Webhook extends CI_Controller {
       $profile = $res->getJSONDecodedBody();
       
       $code = "\u{10008F}";
-      
 
+      $opsi = ["1. Mulai Bermain","2. Panduan"];
 
-      $options[] = new MessageTemplateActionBuilder('1. Mulai Bermain','1. Mulai Bermain');
+      for($i = 0; $i<$opsi.length; $i++){
+        $options[] = new MessageTemplateActionBuilder($opsi[$i]);
+      }
   
       // prepare button template
-      $buttonTemplate = new ButtonTemplateBuilder('title', 'text', 'https://res.cloudinary.com/db9zavtws/image/upload/v1486219056/1_rgnadm.png', $options);
+      $buttonTemplate = new ButtonTemplateBuilder('', '', 'https://res.cloudinary.com/db9zavtws/image/upload/v1486219056/1_rgnadm.png', $options);
   
       // build message
       $messageBuilder = new TemplateMessageBuilder("Gunakan mobile app untuk melihat soal", $buttonTemplate);
