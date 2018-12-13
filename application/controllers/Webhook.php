@@ -128,7 +128,7 @@ class Webhook extends CI_Controller {
     if($this->user['number'] == 0)
     {
       
-      if(strtolower($userMessage) == 'mulai')
+      if(strtolower($userMessage) == '1. Mulai Bermain')
       {
         // reset score
         $this->tebakkode_m->setScore($this->user['user_id'], 0);
@@ -136,15 +136,72 @@ class Webhook extends CI_Controller {
         $this->tebakkode_m->setUserProgress($this->user['user_id'], 1);
         // send question no.1
         $this->sendQuestion($event['replyToken'], 1);
-      } else {
-        $code = "\u{10008F}";
+      } 
+      elseif(strtolower($userMessage) == '2. Panduan') {
+        $code = array("wink" => "\u{10008F}", 
+                    "Gunting" => "\u{100030}",
+                    "Batu" => "\u{100031}",
+                    "Kertas" => "\u{100032}");
 
-        $message = "Pilih Opsi 1. Mulai Bermain, untuk memulai permainan.\n";
-        $message .= "pilih Opsi 2. Panduan, untuk mengetahui tata cara permainan.\n";
-        $message .= "Selamat Bermain! " . $code;
+      $opsi = ["1. Mulai Bermain","2. Panduan"];
+      $length = count($opsi);
 
-        $textMessageBuilder = new TextMessageBuilder($message);
-        $this->bot->replyMessage($event['replyToken'], $textMessageBuilder);
+      for($i = 0; $i<$length; $i++){
+        $options[] = new MessageTemplateActionBuilder($opsi[$i],$code["wink"]);
+      } 
+
+      // prepare button template
+      $buttonTemplate = new ButtonTemplateBuilder(null, 'Janken-Bot Game!', null, $options);
+  
+      // build message
+      $messageBuilder = new TemplateMessageBuilder("Gunakan mobile app untuk melihat soal", $buttonTemplate);
+      
+      $message = "Kamu tinggal memilih salah satu diantara 3 pilihan:\n";
+      $message .= "Gunting Kertas dan Batu.\n";
+      $message .= "Setelah memilih, pilihan kamu akan di bandingkan oleh pilihan bot.\n";
+      $message .= "Kamu akan mendaatkan score jika pilihan mu dapat mengalahkan pilihan bot.\n";
+      
+      $textMessageBuilder = new TextMessageBuilder($message);
+
+      // merge all message
+      $multiMessageBuilder = new MultiMessageBuilder();
+      $multiMessageBuilder->add($textMessageBuilder);
+      $multiMessageBuilder->add($messageBuilder);
+      
+      // send reply message
+      $this->bot->replyMessage($event['replyToken'], $multiMessageBuilder);
+      }
+      else {
+        $code = array("wink" => "\u{10008F}", 
+                    "Gunting" => "\u{100030}",
+                    "Batu" => "\u{100031}",
+                    "Kertas" => "\u{100032}");
+
+      $opsi = ["1. Mulai Bermain","2. Panduan"];
+      $length = count($opsi);
+
+      for($i = 0; $i<$length; $i++){
+        $options[] = new MessageTemplateActionBuilder($opsi[$i],$code["wink"]);
+      } 
+
+      // prepare button template
+      $buttonTemplate = new ButtonTemplateBuilder(null, 'Janken-Bot Game!', null, $options);
+  
+      // build message
+      $messageBuilder = new TemplateMessageBuilder("Gunakan mobile app untuk melihat soal", $buttonTemplate);
+      
+      $message = "Pilih Opsi 1. Mulai Bermain, untuk memulai permainan.\n";
+      $message .= "pilih Opsi 2. Panduan, untuk mengetahui tata cara permainan.\n";
+      $message .= "Selamat Bermain! " . $code["wink"];
+      $textMessageBuilder = new TextMessageBuilder($message);
+
+      // merge all message
+      $multiMessageBuilder = new MultiMessageBuilder();
+      $multiMessageBuilder->add($textMessageBuilder);
+      $multiMessageBuilder->add($messageBuilder);
+      
+      // send reply message
+      $this->bot->replyMessage($event['replyToken'], $multiMessageBuilder);
       }
       
     // if user already begin test
