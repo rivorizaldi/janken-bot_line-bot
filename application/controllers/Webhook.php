@@ -84,7 +84,7 @@ class Webhook extends CI_Controller {
       $length = count($opsi);
 
       for($i = 0; $i<$length; $i++){
-        $options[] = new MessageTemplateActionBuilder($opsi[$i]);
+        $options[] = new MessageTemplateActionBuilder($opsi[$i],$opsi[$i]);
       }
   
       // prepare button template
