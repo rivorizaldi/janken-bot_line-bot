@@ -128,7 +128,7 @@ class Webhook extends CI_Controller {
     if($this->user['number'] == 0)
     {
       
-      if(strtolower($userMessage) == '1. Mulai Bermain')
+      if(strtolower($userMessage) == '1. mulai bermain')
       {
         // reset score
         $this->tebakkode_m->setScore($this->user['user_id'], 0);
@@ -138,7 +138,7 @@ class Webhook extends CI_Controller {
         $this->sendQuestion($event['replyToken'], 1);
       } 
       
-      elseif(strtolower($userMessage) == '2. Panduan') {
+      elseif(strtolower($userMessage) == '2. panduan') {
         $code = array("wink" => "\u{10008F}", 
                     "Gunting" => "\u{100030}",
                     "Batu" => "\u{100031}",
