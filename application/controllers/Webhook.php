@@ -170,38 +170,38 @@ class Webhook extends CI_Controller {
       // send reply message
       $this->bot->replyMessage($event['replyToken'], $multiMessageBuilder);
       }
-      else {
-        $code = array("wink" => "\u{10008F}", 
-                    "Gunting" => "\u{100030}",
-                    "Batu" => "\u{100031}",
-                    "Kertas" => "\u{100032}");
+      // else {
+      //   $code = array("wink" => "\u{10008F}", 
+      //               "Gunting" => "\u{100030}",
+      //               "Batu" => "\u{100031}",
+      //               "Kertas" => "\u{100032}");
 
-      $opsi = ["1. Mulai Bermain","2. Panduan"];
-      $length = count($opsi);
+      // $opsi = ["1. Mulai Bermain","2. Panduan"];
+      // $length = count($opsi);
 
-      for($i = 0; $i<$length; $i++){
-        $options[] = new MessageTemplateActionBuilder($opsi[$i],$opsi[$i]);
-      } 
+      // for($i = 0; $i<$length; $i++){
+      //   $options[] = new MessageTemplateActionBuilder($opsi[$i],$opsi[$i]);
+      // } 
 
-      // prepare button template
-      $buttonTemplate = new ButtonTemplateBuilder(null, 'Janken-Bot Game!', null, $options);
+      // // prepare button template
+      // $buttonTemplate = new ButtonTemplateBuilder(null, 'Janken-Bot Game!', null, $options);
   
-      // build message
-      $messageBuilder = new TemplateMessageBuilder("Gunakan mobile app untuk melihat soal", $buttonTemplate);
+      // // build message
+      // $messageBuilder = new TemplateMessageBuilder("Gunakan mobile app untuk melihat soal", $buttonTemplate);
       
-      $message = "Pilih Opsi 1. Mulai Bermain, untuk memulai permainan.\n";
-      $message .= "pilih Opsi 2. Panduan, untuk mengetahui tata cara permainan.\n";
-      $message .= "Selamat Bermain! " . $code["wink"];
-      $textMessageBuilder = new TextMessageBuilder($message);
+      // $message = "Pilih Opsi 1. Mulai Bermain, untuk memulai permainan.\n";
+      // $message .= "pilih Opsi 2. Panduan, untuk mengetahui tata cara permainan.\n";
+      // $message .= "Selamat Bermain! " . $code["wink"];
+      // $textMessageBuilder = new TextMessageBuilder($message);
 
-      // merge all message
-      $multiMessageBuilder = new MultiMessageBuilder();
-      $multiMessageBuilder->add($textMessageBuilder);
-      $multiMessageBuilder->add($messageBuilder);
+      // // merge all message
+      // $multiMessageBuilder = new MultiMessageBuilder();
+      // $multiMessageBuilder->add($textMessageBuilder);
+      // $multiMessageBuilder->add($messageBuilder);
       
-      // send reply message
-      $this->bot->replyMessage($event['replyToken'], $multiMessageBuilder);
-      }
+      // // send reply message
+      // $this->bot->replyMessage($event['replyToken'], $multiMessageBuilder);
+      // }
       
   }
 
