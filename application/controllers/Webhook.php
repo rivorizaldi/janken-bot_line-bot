@@ -125,9 +125,7 @@ class Webhook extends CI_Controller {
 
   private function textMessage($event){
     $userMessage = $event['message']['text'];
-    if($this->user['number'] == 0)
-    {
-      
+
       if(strtolower($userMessage) == '1. Mulai Bermain')
       {
         // reset score
@@ -137,6 +135,7 @@ class Webhook extends CI_Controller {
         // send question no.1
         $this->sendQuestion($event['replyToken'], 1);
       } 
+      
       elseif(strtolower($userMessage) == '2. Panduan') {
         $code = array("wink" => "\u{10008F}", 
                     "Gunting" => "\u{100030}",
@@ -204,10 +203,6 @@ class Webhook extends CI_Controller {
       $this->bot->replyMessage($event['replyToken'], $multiMessageBuilder);
       }
       
-    // if user already begin test
-    } else {
-      $this->checkAnswer($userMessage, $event['replyToken']);
-    }
   }
 
   private function stickerMessage($event){
