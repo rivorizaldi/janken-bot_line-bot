@@ -127,7 +127,6 @@ class Webhook extends CI_Controller {
     $userMessage = $event['message']['text'];
     if($this->user['number'] == 0)
     {
-      
       if(strtolower($userMessage) == '1. mulai bermain')
       {
         // reset score
@@ -204,8 +203,7 @@ class Webhook extends CI_Controller {
       // send reply message
       $this->bot->replyMessage($event['replyToken'], $multiMessageBuilder);
       }
-      
-    // if user already begin test
+      // if user already begin test
     } else {
       $this->checkAnswer($userMessage, $event['replyToken']);
     }
@@ -234,25 +232,31 @@ class Webhook extends CI_Controller {
 
   public function sendQuestion($replyToken, $questionNum=1){
     // get question from database
-    $question = $this->tebakkode_m->getQuestion($questionNum);
+    //$question = $this->tebakkode_m->getQuestion($questionNum);
 
-    // prepare answer options
-    for($opsi = "a"; $opsi <= "d"; $opsi++) {
-        if(!empty($question['option_'.$opsi]))
-            $options[] = new MessageTemplateActionBuilder($question['option_'.$opsi], $question['option_'.$opsi]);
-    }
- 
+    $opsi = ["Gunting","Kertas","Batu"];
+    $length = count($opsi);
+
+    for($i = 0; $i<$length; $i++){
+      $options[] = new MessageTemplateActionBuilder($opsi[$i],$opsi[$i]);
+    } 
+
     // prepare button template
-    $buttonTemplate = new ButtonTemplateBuilder($question['number']."/10", $question['text'], $question['image'], $options);
- 
+    $buttonTemplate = new ButtonTemplateBuilder(null, 'Janken-Bot Game!', null, $options);
+  
     // build message
     $messageBuilder = new TemplateMessageBuilder("Gunakan mobile app untuk melihat soal", $buttonTemplate);
+    // prepare button template
  
     // send message
     $response = $this->bot->replyMessage($replyToken, $messageBuilder);
   }
 
   private function checkAnswer($message, $replyToken){
+
+    $choice = ["gunting","kertas","batu"];
+
+    $compChoice = $choice[mt_rand(0,2)];
     // if answer is true, increment score
     if($this->tebakkode_m->isAnswerEqual($this->user['number'], $message)){
       $this->user['score']++;
