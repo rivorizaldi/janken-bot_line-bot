@@ -42,14 +42,25 @@ class Tebakkode_m extends CI_Model {
   return false;
   }
 
-  function isAnswerEqual($number, $answer){
-    $this->db->where('number', $number)
-      ->where('answer', $answer);
- 
-    if(count($this->db->get('questions')->row()) > 0)
-      return true;
- 
-    return false;
+  function compareChoice($playerChoice){
+    $choice = ["Gunting","Kertas","Batu"];
+
+    $compChoice = $choice[mt_rand(0,2)];
+
+    switch($playerChoice) {
+      case "Gunting":
+        $result = $compChoice == "Gunting" ? "Seri" : ($compChoice == "Batu" ? "Menang" : "Kalah");
+        return $result;
+        break;
+      case "Batu":
+        $result = $compChoice == "Batu" ? "Seri" : ($compChoice == "Kertas" ? "Menang" : "Kalah");
+        return $result;
+        break;
+      case "Kertas":
+        $result = $compChoice == "Kertas" ? "Seri" : ($compChoice == "Gunting" ? "Menang" : "Kalah");
+        return $result;
+        break;
+    }
   }
 
   function setUserProgress($user_id, $newNumber){

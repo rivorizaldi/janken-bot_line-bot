@@ -234,7 +234,7 @@ class Webhook extends CI_Controller {
     // get question from database
     //$question = $this->tebakkode_m->getQuestion($questionNum);
 
-    $opsi = ["Gunting","Kertas","Batu"];
+    $opsi = ["Gunting","Kertas","Batu","Lihat Score"];
     $length = count($opsi);
 
     for($i = 0; $i<$length; $i++){
@@ -253,21 +253,23 @@ class Webhook extends CI_Controller {
   }
 
   private function checkAnswer($message, $replyToken){
-
-    $choice = ["gunting","kertas","batu"];
-
-    $compChoice = $choice[mt_rand(0,2)];
+    $CompScore = 0;
+    
     // if answer is true, increment score
-    if($this->tebakkode_m->isAnswerEqual($this->user['number'], $message)){
+    if($this->tebakkode_m->compareChoice($message) == "Menang"){
       $this->user['score']++;
       $this->tebakkode_m->setScore($this->user['user_id'], $this->user['score']);
+      // send next question
+      $this->sendQuestion($replyToken, $this->user['number'] + 1);
     }
- 
-    if($this->user['number'] < 10)
-    {
-      // update number progress
-    $this->tebakkode_m->setUserProgress($this->user['user_id'], $this->user['number'] + 1);
- 
+    elseif($this->tebakkode_m->compareChoice($message) == "Seri"){
+      $this->user['score'] = $this->user['score'];
+      $this->tebakkode_m->setScore($this->user['user_id'], $this->user['score']);
+      // send next question
+      $this->sendQuestion($replyToken, $this->user['number'] + 1);
+    }
+    elseif($this->tebakkode_m->compareChoice($message) == "Kalah"){
+      $CompScore++;
       // send next question
       $this->sendQuestion($replyToken, $this->user['number'] + 1);
     }
@@ -277,20 +279,18 @@ class Webhook extends CI_Controller {
       $textMessageBuilder1 = new TextMessageBuilder($message);
  
       // create sticker message
-      $stickerId = ($this->user['score'] < 8) ? 100 : 114;
-      $stickerMessageBuilder = new StickerMessageBuilder(1, $stickerId);
+      // $stickerId = ($this->user['score'] < 8) ? 100 : 114;
+      // $stickerMessageBuilder = new StickerMessageBuilder(1, $stickerId);
  
       // create play again message
-      $message = ($this->user['score'] < 8) ?
-'Wkwkwk! Nyerah? Ketik "MULAI" untuk bermain lagi!':
-'Great! Mantap bro! Ketik "MULAI" untuk bermain lagi!';
-      $textMessageBuilder2 = new TextMessageBuilder($message);
+//       $message = ($this->user['score'] < 8) ?
+// 'Wkwkwk! Nyerah? Ketik "MULAI" untuk bermain lagi!':
+// 'Great! Mantap bro! Ketik "MULAI" untuk bermain lagi!';
+//       $textMessageBuilder2 = new TextMessageBuilder($message);
  
       // merge all message
       $multiMessageBuilder = new MultiMessageBuilder();
       $multiMessageBuilder->add($textMessageBuilder1);
-      $multiMessageBuilder->add($stickerMessageBuilder);
-      $multiMessageBuilder->add($textMessageBuilder2);
  
       // send reply message
       $this->bot->replyMessage($replyToken, $multiMessageBuilder);
