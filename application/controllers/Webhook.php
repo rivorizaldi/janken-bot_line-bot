@@ -205,7 +205,7 @@ class Webhook extends CI_Controller {
       }
       // if user already begin test
     } else {
-      $this->checkAnswer($userMessage, $event['replyToken']);
+      $this->checkResult($userMessage, $event['replyToken']);
     }
   }
 
@@ -252,26 +252,42 @@ class Webhook extends CI_Controller {
     $response = $this->bot->replyMessage($replyToken, $messageBuilder);
   }
 
-  private function checkAnswer($message, $replyToken){
+  private function checkResult($message, $replyToken){
     $CompScore = 0;
     
     // if answer is true, increment score
     if($this->tebakkode_m->compareChoice($message) == "Menang"){
+      $message = "Bot Menang!";
+      $textMessageBuilder1 = new TextMessageBuilder($message);
+      
+      
       $this->user['score']++;
       $this->tebakkode_m->setScore($this->user['user_id'], $this->user['score']);
+
+      $this->bot->replyMessage($replyToken, $textMessageBuilder1);
       // send next question
-      $this->sendQuestion($replyToken, $this->user['number'] + 1);
+      $this->sendQuestion($replyToken);
     }
     elseif($this->tebakkode_m->compareChoice($message) == "Seri"){
+      $message = "Seri Brow!";
+      $textMessageBuilder1 = new TextMessageBuilder($message);
+
       $this->user['score'] = $this->user['score'];
       $this->tebakkode_m->setScore($this->user['user_id'], $this->user['score']);
+
+      $this->bot->replyMessage($replyToken, $textMessageBuilder1);
       // send next question
-      $this->sendQuestion($replyToken, $this->user['number'] + 1);
+      $this->sendQuestion($replyToken);
     }
     elseif($this->tebakkode_m->compareChoice($message) == "Kalah"){
+      $message = "Seri Brow!";
+      $textMessageBuilder1 = new TextMessageBuilder($message);
+
       $CompScore++;
+
+      $this->bot->replyMessage($replyToken, $textMessageBuilder1);
       // send next question
-      $this->sendQuestion($replyToken, $this->user['number'] + 1);
+      $this->sendQuestion($replyToken);
     }
     else {
       // create user score message
@@ -294,7 +310,6 @@ class Webhook extends CI_Controller {
  
       // send reply message
       $this->bot->replyMessage($replyToken, $multiMessageBuilder);
-      $this->tebakkode_m->setUserProgress($this->user['user_id'], 0);
     }
   }
 

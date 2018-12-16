@@ -2,10 +2,20 @@
 
 class Tebakkode_m extends CI_Model {
 
+  //private $compChoice;
+
   function __construct(){
     parent::__construct();
     $this->load->database();
   }
+
+  // function set_compChoice($compChoice) {
+  //   $this->compChoice = $compChoice;
+  // }
+
+  // function get_compChoice(){
+  //   return $this->compChoice;
+  // }
 
   // Events Log
   function log_events($signature, $body)
