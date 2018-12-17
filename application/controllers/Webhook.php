@@ -126,7 +126,7 @@ class Webhook extends CI_Controller {
 
   private function textMessage($event){
     $userMessage = $event['message']['text'];
-    if($userMessage !== 'Gunting')
+    if($userMessage !== 'Gunting' || 'Kertas' || 'Batu' || 'Lihat Score')
       {
 
       if(strtolower($userMessage) == '1. mulai bermain')
