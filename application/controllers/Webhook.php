@@ -279,7 +279,7 @@ class Webhook extends CI_Controller {
       $this->sendQuestion($replyToken);
     }
     elseif($compareChoice == "Kalah"){
-      $message = "Seri Brow!";
+      $message = "Bot Kalah!";
       $textMessageBuilder1 = new TextMessageBuilder($message);
 
       $CompScore++;
@@ -290,7 +290,7 @@ class Webhook extends CI_Controller {
     }
     else {
       // create user score message
-      $message = 'Skormu '. $this->user['score'];
+      $message = 'Skormu '. $this->user['score'] . 'Skor Komp' . $CompScore;
       $textMessageBuilder1 = new TextMessageBuilder($message);
  
       // create sticker message
