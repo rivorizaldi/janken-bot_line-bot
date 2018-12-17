@@ -73,14 +73,6 @@ class Tebakkode_m extends CI_Model {
     }
   }
 
-  function setUserProgress($user_id, $newNumber){
-    $this->db->set('number', $newNumber)
-      ->where('user_id', $user_id)
-      ->update('users');
- 
-    return $this->db->affected_rows();
-  }
-
   function setScore($user_id, $score){
     $this->db->set('score', $score)
     ->where('user_id', $user_id)

@@ -126,16 +126,16 @@ class Webhook extends CI_Controller {
 
   private function textMessage($event){
     $userMessage = $event['message']['text'];
-    // if($this->user['number'] == 0)
-    // {
+    if($userMessage !== 'Gunting')
+      {
+
       if(strtolower($userMessage) == '1. mulai bermain')
       {
         // reset score
         $this->tebakkode_m->setScore($this->user['user_id'], 0);
-        // update number progress
-        $this->tebakkode_m->setUserProgress($this->user['user_id'], 1);
+
         // send question no.1
-        $this->sendQuestion($event['replyToken'], 1);
+        $this->sendChoice($event['replyToken']);
       } 
       
       elseif(strtolower($userMessage) == '2. panduan') {
@@ -204,10 +204,9 @@ class Webhook extends CI_Controller {
       // send reply message
       $this->bot->replyMessage($event['replyToken'], $multiMessageBuilder);
       }
-      // if user already begin test
-    // } else {
-    //   $this->checkResult($userMessage, $event['replyToken']);
-    // }
+    } else {
+      $this->checkResult($userMessage,$event['replyToken']);
+    }
   }
 
   private function stickerMessage($event){
@@ -231,9 +230,7 @@ class Webhook extends CI_Controller {
     $this->bot->replyMessage($event['replyToken'], $multiMessageBuilder);
   }
 
-  public function sendQuestion($replyToken, $questionNum=1){
-    // get question from database
-    //$question = $this->tebakkode_m->getQuestion($questionNum);
+  public function sendChoice($replyToken){
 
     $opsi = ["Gunting","Kertas","Batu","Lihat Score"];
     $length = count($opsi);
