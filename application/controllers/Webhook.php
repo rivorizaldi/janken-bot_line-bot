@@ -254,12 +254,11 @@ class Webhook extends CI_Controller {
 
   private function checkResult($message, $replyToken){
     $CompScore = 0;
-    
+    $compareChoice = $this->tebakkode_m->compareChoice($message);
     // if answer is true, increment score
-    if($this->tebakkode_m->compareChoice($message) == "Menang"){
+    if($compareChoice == "Menang"){
       $message = "Bot Menang!";
       $textMessageBuilder1 = new TextMessageBuilder($message);
-      
       
       $this->user['score']++;
       $this->tebakkode_m->setScore($this->user['user_id'], $this->user['score']);
@@ -268,7 +267,7 @@ class Webhook extends CI_Controller {
       // send next question
       $this->sendQuestion($replyToken);
     }
-    elseif($this->tebakkode_m->compareChoice($message) == "Seri"){
+    elseif($compareChoice == "Seri"){
       $message = "Seri Brow!";
       $textMessageBuilder1 = new TextMessageBuilder($message);
 
@@ -279,7 +278,7 @@ class Webhook extends CI_Controller {
       // send next question
       $this->sendQuestion($replyToken);
     }
-    elseif($this->tebakkode_m->compareChoice($message) == "Kalah"){
+    elseif($compareChoice == "Kalah"){
       $message = "Seri Brow!";
       $textMessageBuilder1 = new TextMessageBuilder($message);
 
