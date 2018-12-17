@@ -126,8 +126,8 @@ class Webhook extends CI_Controller {
 
   private function textMessage($event){
     $userMessage = $event['message']['text'];
-    if($this->user['number'] == 0)
-    {
+    // if($this->user['number'] == 0)
+    // {
       if(strtolower($userMessage) == '1. mulai bermain')
       {
         // reset score
@@ -205,9 +205,9 @@ class Webhook extends CI_Controller {
       $this->bot->replyMessage($event['replyToken'], $multiMessageBuilder);
       }
       // if user already begin test
-    } else {
-      $this->checkResult($userMessage, $event['replyToken']);
-    }
+    // } else {
+    //   $this->checkResult($userMessage, $event['replyToken']);
+    // }
   }
 
   private function stickerMessage($event){
@@ -256,7 +256,7 @@ class Webhook extends CI_Controller {
   private function checkResult($message, $replyToken){
 
     $compareChoice = $this->tebakkode_m->compareChoice($message);
-    
+
     // if answer is true, increment score
     if($compareChoice == "Menang"){
       $message = "Bot Menang!";
@@ -289,7 +289,7 @@ class Webhook extends CI_Controller {
     }
     else {
       // create user score message
-      $message = 'Skormu '. $this->user['score'] . 'Skor Komp' . $this->$CompScore;
+      $message = 'Skormu '. $this->user['score'] . ' Skor Komp' . $this->$CompScore;
       $textMessageBuilder1 = new TextMessageBuilder($message);
 
       // merge all message
