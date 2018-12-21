@@ -288,7 +288,7 @@ class Webhook extends CI_Controller {
     }
     else {
       // create user score message
-      $message = 'Skormu '. $this->user['score'] . ' Skor Komp' . $this->$CompScore;
+      $message = 'Skormu '. $this->$CompScore . ' Skor Komp' . $this->user['score'];
       $textMessageBuilder1 = new TextMessageBuilder($message);
 
       // merge all message
