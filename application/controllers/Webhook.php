@@ -276,8 +276,8 @@ class Webhook extends CI_Controller {
 
       $compChoice = $choice[mt_rand(0,2)];
         //$result = $compChoice == "Batu" ? "Seri" : ($compChoice == "Kertas" ? "Menang" : "Kalah");
-        $result = $compChoice == "Gunting" ? "Seri" : ($compChoice == "Batu" ? "Menang" : "Kalah");
-        $message = $result == "Seri" ? "Bot Mengeluarkan Gunting, Seri" : ($result == "Menang" ? "Bot Mengeluarkan Batu, Bot Menang" : "Bot Mengeluarkan Kertas, Bot Kalah");
+        $result = $compChoice == "Batu" ? "Seri" : ($compChoice == "Kertas" ? "Menang" : "Kalah");
+        $message = $result == "Seri" ? "Bot Mengeluarkan Batu, Seri" : ($result == "Menang" ? "Bot Mengeluarkan Kertas, Bot Menang" : "Bot Mengeluarkan Gunting, Bot Kalah");
         $textMessageBuilder1 = new TextMessageBuilder($message);
       
         $score = $result == "Seri" ? $this->user['score'] : ($result == "Menang" ? $this->tebakkode_m->$comScore++ : $this->user['score']++);
@@ -290,8 +290,8 @@ class Webhook extends CI_Controller {
 
       $compChoice = $choice[mt_rand(0,2)];
         //$result = $compChoice == "Kertas" ? "Seri" : ($compChoice == "Gunting" ? "Menang" : "Kalah");
-        $result = $compChoice == "Gunting" ? "Seri" : ($compChoice == "Batu" ? "Menang" : "Kalah");
-        $message = $result == "Seri" ? "Bot Mengeluarkan Gunting, Seri" : ($result == "Menang" ? "Bot Mengeluarkan Batu, Bot Menang" : "Bot Mengeluarkan Kertas, Bot Kalah");
+        $result = $compChoice == "Kertas" ? "Seri" : ($compChoice == "Gunting" ? "Menang" : "Kalah");
+        $message = $result == "Seri" ? "Bot Mengeluarkan Kertas, Seri" : ($result == "Menang" ? "Bot Mengeluarkan Gunting, Bot Menang" : "Bot Mengeluarkan Batu, Bot Kalah");
         $textMessageBuilder1 = new TextMessageBuilder($message);
       
         $score = $result == "Seri" ? $this->user['score'] : ($result == "Menang" ? $this->tebakkode_m->$comScore++ : $this->user['score']++);
