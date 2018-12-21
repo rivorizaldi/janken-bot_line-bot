@@ -503,9 +503,24 @@ class Webhook extends CI_Controller {
       $message = 'Skormu '. $this->tebakkode_m->get_comScore() . ' Skor Komp' . $this->user['score'];
       $textMessageBuilder1 = new TextMessageBuilder($message);
 
+      $opsi = ["Gunting","Kertas","Batu","Lihat Score"];
+      $opsiText = ["Kamu Mengeluarkan Gunting","Kamu Mengeluarkan Kertas","Kamu Mengeluarkan Batu","Lihat Score"];
+      $length = count($opsi);
+
+      for($i = 0; $i<$length; $i++){
+        $options[] = new MessageTemplateActionBuilder($opsi[$i],$opsiText[$i]);
+      } 
+
+      // prepare button template
+      $buttonTemplate = new ButtonTemplateBuilder(null, 'Janken-Bot Game!', null, $options);
+    
+      // build message
+      $messageBuilder = new TemplateMessageBuilder("Gunakan mobile app untuk melihat soal", $buttonTemplate);
+
       // merge all message
       $multiMessageBuilder = new MultiMessageBuilder();
       $multiMessageBuilder->add($textMessageBuilder1);
+      $multiMessageBuilder->add($messageBuilder);
 
       // send reply message
       $this->bot->replyMessage($replyToken, $multiMessageBuilder);
