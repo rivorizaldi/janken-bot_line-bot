@@ -254,6 +254,7 @@ class Webhook extends CI_Controller {
 
     $compareChoice = $this->tebakkode_m->compareChoice($playerChoice);
 
+    if($compareChoice) { 
     switch($compareChoice){
       case "Bot Mengeluarkan Gunting, Seri":
         $textMessageBuilder1 = new TextMessageBuilder($compareChoice);
@@ -324,18 +325,21 @@ class Webhook extends CI_Controller {
 
         $this->bot->replyMessage($replyToken, $textMessageBuilder1);
         break;
-      case "Lihat Score":
-        // create user score message
-        $message = 'Skormu '. $this->tebakkode_m->get_comScore() . ' Skor Komp' . $this->user['score'];
-        $textMessageBuilder1 = new TextMessageBuilder($message);
-
-        // merge all message
-        $multiMessageBuilder = new MultiMessageBuilder();
-        $multiMessageBuilder->add($textMessageBuilder1);
-  
-        // send reply message
-        $this->bot->replyMessage($replyToken, $multiMessageBuilder);
     }
+  } 
+    else {
+      // create user score message
+      $message = 'Skormu '. $this->tebakkode_m->get_comScore() . ' Skor Komp' . $this->user['score'];
+      $textMessageBuilder1 = new TextMessageBuilder($message);
+
+      // merge all message
+      $multiMessageBuilder = new MultiMessageBuilder();
+      $multiMessageBuilder->add($textMessageBuilder1);
+
+      // send reply message
+      $this->bot->replyMessage($replyToken, $multiMessageBuilder);
+    }
+    
     // //if answer is true, increment score
     // if($compareChoice == "Bot Mengeluarkan Batu, Bot Menang"){
     //   $message = "Bot Mengeluarkan Batu, Bot Menang";
