@@ -15,6 +15,7 @@ class Webhook extends CI_Controller {
   private $events;
   private $signature;
   private $user;
+  private $compScore;
 
   function __construct()
   {
@@ -44,6 +45,8 @@ class Webhook extends CI_Controller {
 
     // debuging data
     file_put_contents('php://stderr', 'Body: '.$body);
+
+    $this->compScore = 0;
 
     if(is_array($this->events['events'])){
       foreach ($this->events['events'] as $event){
@@ -340,7 +343,9 @@ class Webhook extends CI_Controller {
         break;
       case "Bot Mengeluarkan Gunting, Bot Menang":
 
-        $this->tebakkode_m->$comScore++;
+        $this->compScore++;
+        $this->tebakkode_m->set_comScore($this->compScore);
+
         $opsi = ["Gunting","Kertas","Batu","Lihat Score"];
         $opsiText = ["Kamu Mengeluarkan Gunting","Kamu Mengeluarkan Kertas","Kamu Mengeluarkan Batu","Lihat Score"];
         $length = count($opsi);
@@ -365,7 +370,8 @@ class Webhook extends CI_Controller {
         break;
       case "Bot Mengeluarkan Batu, Bot Menang":
 
-        $this->tebakkode_m->$comScore++;
+        $this->compScore++;
+        $this->tebakkode_m->set_comScore($this->compScore);
 
         $opsi = ["Gunting","Kertas","Batu","Lihat Score"];
         $opsiText = ["Kamu Mengeluarkan Gunting","Kamu Mengeluarkan Kertas","Kamu Mengeluarkan Batu","Lihat Score"];
@@ -391,7 +397,8 @@ class Webhook extends CI_Controller {
         break;
       case "Bot Mengeluarkan Kertas, Bot Menang":
 
-        $this->tebakkode_m->$comScore++;
+        $this->compScore++;
+        $this->tebakkode_m->set_comScore($this->compScore);
 
         $opsi = ["Gunting","Kertas","Batu","Lihat Score"];
         $opsiText = ["Kamu Mengeluarkan Gunting","Kamu Mengeluarkan Kertas","Kamu Mengeluarkan Batu","Lihat Score"];
@@ -500,7 +507,7 @@ class Webhook extends CI_Controller {
   } 
     else {
       // create user score message
-      $message = 'Skormu '. $this->tebakkode_m->get_comScore() . ' Skor Komp' . $this->user['score'];
+      $message = 'Skormu '. $this->user['score'] . ' Skor Bot ' . $this->tebakkode_m->get_comScore();
       $textMessageBuilder1 = new TextMessageBuilder($message);
 
       $opsi = ["Gunting","Kertas","Batu","Lihat Score"];
