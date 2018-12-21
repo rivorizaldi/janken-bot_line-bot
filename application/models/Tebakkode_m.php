@@ -45,15 +45,15 @@ class Tebakkode_m extends CI_Model {
 
     switch($playerChoice) {
       case "Kamu Mengeluarkan Gunting":
-        $result = $compChoice == "Gunting" ? "Seri" : ($compChoice == "Batu" ? "Menang" : "Kalah");
+        $result = $compChoice == "Gunting" ? "Bot Mengeluarkan Gunting, Seri" : ($compChoice == "Batu" ? "Bot Mengeluarkan Batu, Bot Menang" : "Bot Mengeluarkan Kertas, Bot Kalah");
         return $result;
         break;
       case "Kamu Mengeluarkan Batu":
-        $result = $compChoice == "Batu" ? "Seri" : ($compChoice == "Kertas" ? "Menang" : "Kalah");
+        $result = $compChoice == "Batu" ? "Bot Mengeluarkan Batu, Seri" : ($compChoice == "Kertas" ? "Bot Mengeluarkan Kertas, Bot Menang" : "Bot Mengeluarkan Gunting, Bot Kalah");
         return $result;
         break;
       case "Kamu Mengeluarkan Kertas":
-        $result = $compChoice == "Kertas" ? "Seri" : ($compChoice == "Gunting" ? "Menang" : "Kalah");
+        $result = $compChoice == "Kertas" ? "Bot Mengeluarkan Kertas, Seri" : ($compChoice == "Gunting" ? "Bot Mengeluarkan Gunting, Bot Menang" : "Bot Mengeluarkan Batu, Bot Kalah");
         return $result;
         break;
     }
