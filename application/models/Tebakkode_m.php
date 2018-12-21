@@ -2,7 +2,7 @@
 
 class Tebakkode_m extends CI_Model {
 
-  public $comScore = 0;
+  public $comScore = 1;
 
   function __construct(){
     parent::__construct();
