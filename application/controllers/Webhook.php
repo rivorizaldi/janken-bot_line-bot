@@ -100,7 +100,8 @@ class Webhook extends CI_Controller {
       $message  = "Hai, " . $profile['displayName'] . "!\n";
       $message2 = "Pilih Opsi 1. Mulai Bermain, untuk memulai permainan.\n";
       $message2 .= "pilih Opsi 2. Panduan, untuk mengetahui tata cara permainan.\n";
-      $message2 .= "Selamat Bermain! " . $code["wink"];
+      $message2 .= "Selamat Bermain! " . $code["wink"]."\n\n";
+      $message2 .= "P.S : Kamu tidak perlu membalas pesan dari bot secara manual, cukup memilih pilihan yang sudah tersedia.";
       $textMessageBuilder = new TextMessageBuilder($message);
       $textMessageBuilder2 = new TextMessageBuilder($message2);
 
@@ -498,7 +499,7 @@ class Webhook extends CI_Controller {
         break;
     }
   } 
-    elseif ($playerChoice == "Lihat Score") {
+    else {
       // create user score message
       $message = 'Skormu '. $this->tebakkode_m->get_comScore() . ' Skor Komp' . $this->user['score'];
       $textMessageBuilder1 = new TextMessageBuilder($message);
@@ -520,32 +521,6 @@ class Webhook extends CI_Controller {
       // merge all message
       $multiMessageBuilder = new MultiMessageBuilder();
       $multiMessageBuilder->add($textMessageBuilder1);
-      $multiMessageBuilder->add($messageBuilder);
-
-      // send reply message
-      $this->bot->replyMessage($replyToken, $multiMessageBuilder);
-    } else {
-
-      $message = "Keyword yang dimasukkan tidak sesuai dengan pilihan yang ada";
-      $textMessageBuilder = new TextMessageBuilder($message);
-
-      $opsi = ["Gunting","Kertas","Batu","Lihat Score"];
-      $opsiText = ["Kamu Mengeluarkan Gunting","Kamu Mengeluarkan Kertas","Kamu Mengeluarkan Batu","Lihat Score"];
-      $length = count($opsi);
-
-      for($i = 0; $i<$length; $i++){
-        $options[] = new MessageTemplateActionBuilder($opsi[$i],$opsiText[$i]);
-      } 
-
-      // prepare button template
-      $buttonTemplate = new ButtonTemplateBuilder(null, 'Janken-Bot Game!', null, $options);
-    
-      // build message
-      $messageBuilder = new TemplateMessageBuilder("Gunakan mobile app untuk melihat soal", $buttonTemplate);
-
-      // merge all message
-      $multiMessageBuilder = new MultiMessageBuilder();
-      $multiMessageBuilder->add($textMessageBuilder);
       $multiMessageBuilder->add($messageBuilder);
 
       // send reply message
