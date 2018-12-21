@@ -250,42 +250,49 @@ class Webhook extends CI_Controller {
     $response = $this->bot->replyMessage($replyToken, $messageBuilder);
   }
 
-  private function checkResult($message, $replyToken){
+  private function checkResult($playerChoice, $replyToken){
 
-    $compareChoice = $this->tebakkode_m->compareChoice($message);
-    // if answer is true, increment score
-    if($compareChoice == "Menang"){
-      $message = "Bot Menang!";
-      $textMessageBuilder1 = new TextMessageBuilder($message);
+    //$compareChoice = $this->tebakkode_m->compareChoice($message);
+
+    $choice = ["Gunting","Kertas","Batu"];
+
+    $compChoice = $choice[mt_rand(0,2)];
+
+    switch($playerChoice) {
+      case "Kamu Mengeluarkan Gunting":
+        $result = $compChoice == "Gunting" ? "Seri" : ($compChoice == "Batu" ? "Menang" : "Kalah");
+        $message = $result == "Seri" ? "Bot Mengeluarkan Gunting, Seri" : ($result == "Menang" ? "Bot Mengeluarkan Batu, Bot Menang" : "Bot Mengeluarkan Kertas, Bot Kalah");
+        $textMessageBuilder1 = new TextMessageBuilder($message);
       
-      $this->user['score']++;
-      $this->tebakkode_m->setScore($this->user['user_id'], $this->user['score']);
+        $score = $result == "Seri" ? $this->user['score'] : ($result == "Menang" ? $this->tebakkode_m->$comScore++ : $this->user['score']++);
+        $this->tebakkode_m->setScore($this->user['user_id'], $score);
 
-      $this->bot->replyMessage($replyToken, $textMessageBuilder1);
+        $this->bot->replyMessage($replyToken, $textMessageBuilder1);
+        
+        break;
+      case "Kamu Mengeluarkan Batu":
+        //$result = $compChoice == "Batu" ? "Seri" : ($compChoice == "Kertas" ? "Menang" : "Kalah");
+        $result = $compChoice == "Gunting" ? "Seri" : ($compChoice == "Batu" ? "Menang" : "Kalah");
+        $message = $result == "Seri" ? "Bot Mengeluarkan Gunting, Seri" : ($result == "Menang" ? "Bot Mengeluarkan Batu, Bot Menang" : "Bot Mengeluarkan Kertas, Bot Kalah");
+        $textMessageBuilder1 = new TextMessageBuilder($message);
+      
+        $score = $result == "Seri" ? $this->user['score'] : ($result == "Menang" ? $this->tebakkode_m->$comScore++ : $this->user['score']++);
+        $this->tebakkode_m->setScore($this->user['user_id'], $score);
 
-    }
-    elseif($compareChoice == "Seri"){
-      $message = "Seri Brow!";
-      $textMessageBuilder1 = new TextMessageBuilder($message);
+        $this->bot->replyMessage($replyToken, $textMessageBuilder1);
+        break;
+      case "Kamu Mengeluarkan Kertas":
+        //$result = $compChoice == "Kertas" ? "Seri" : ($compChoice == "Gunting" ? "Menang" : "Kalah");
+        $result = $compChoice == "Gunting" ? "Seri" : ($compChoice == "Batu" ? "Menang" : "Kalah");
+        $message = $result == "Seri" ? "Bot Mengeluarkan Gunting, Seri" : ($result == "Menang" ? "Bot Mengeluarkan Batu, Bot Menang" : "Bot Mengeluarkan Kertas, Bot Kalah");
+        $textMessageBuilder1 = new TextMessageBuilder($message);
+      
+        $score = $result == "Seri" ? $this->user['score'] : ($result == "Menang" ? $this->tebakkode_m->$comScore++ : $this->user['score']++);
+        $this->tebakkode_m->setScore($this->user['user_id'], $score);
 
-      $this->user['score'] = $this->user['score'];
-      $this->tebakkode_m->setScore($this->user['user_id'], $this->user['score']);
-
-      $this->bot->replyMessage($replyToken, $textMessageBuilder1);
-
-    }
-    elseif($compareChoice == "Kalah"){
-      $message = "Bot Kalah!";
-      $textMessageBuilder1 = new TextMessageBuilder($message);
-
-      $this->tebakkode_m->$comScore++;
-      //$this->tebakkode_m->set_comScore($this->$CompScore);
-
-      $this->bot->replyMessage($replyToken, $textMessageBuilder1);
-
-    }
-    else {
-      // create user score message
+        $this->bot->replyMessage($replyToken, $textMessageBuilder1);
+        break;
+      case "Lihat Score":
       $message = 'Skormu '. $this->tebakkode_m->get_comScore() . ' Skor Komp' . $this->user['score'];
       $textMessageBuilder1 = new TextMessageBuilder($message);
 
@@ -296,6 +303,50 @@ class Webhook extends CI_Controller {
       // send reply message
       $this->bot->replyMessage($replyToken, $multiMessageBuilder);
     }
+
+    // if answer is true, increment score
+    // if($compareChoice == "Menang"){
+    //   $message = "Bot Menang!";
+    //   $textMessageBuilder1 = new TextMessageBuilder($message);
+      
+    //   $this->user['score']++;
+    //   $this->tebakkode_m->setScore($this->user['user_id'], $this->user['score']);
+
+    //   $this->bot->replyMessage($replyToken, $textMessageBuilder1);
+
+    // }
+    // elseif($compareChoice == "Seri"){
+    //   $message = "Seri Brow!";
+    //   $textMessageBuilder1 = new TextMessageBuilder($message);
+
+    //   $this->user['score'] = $this->user['score'];
+    //   $this->tebakkode_m->setScore($this->user['user_id'], $this->user['score']);
+
+    //   $this->bot->replyMessage($replyToken, $textMessageBuilder1);
+
+    // }
+    // elseif($compareChoice == "Kalah"){
+    //   $message = "Bot Kalah!";
+    //   $textMessageBuilder1 = new TextMessageBuilder($message);
+
+    //   $this->tebakkode_m->$comScore++;
+    //   //$this->tebakkode_m->set_comScore($this->$CompScore);
+
+    //   $this->bot->replyMessage($replyToken, $textMessageBuilder1);
+
+    // }
+    // else {
+    //   // create user score message
+    //   $message = 'Skormu '. $this->tebakkode_m->get_comScore() . ' Skor Komp' . $this->user['score'];
+    //   $textMessageBuilder1 = new TextMessageBuilder($message);
+
+    //   // merge all message
+    //   $multiMessageBuilder = new MultiMessageBuilder();
+    //   $multiMessageBuilder->add($textMessageBuilder1);
+ 
+    //   // send reply message
+    //   $this->bot->replyMessage($replyToken, $multiMessageBuilder);
+    // }
   }
 
 }
