@@ -15,8 +15,6 @@ class Webhook extends CI_Controller {
   private $events;
   private $signature;
   private $user;
-  private $CompScore = 0;
-
 
   function __construct()
   {
@@ -254,7 +252,7 @@ class Webhook extends CI_Controller {
   private function checkResult($message, $replyToken){
 
     $compareChoice = $this->tebakkode_m->compareChoice($message);
-
+    $CompScore = 0;
     // if answer is true, increment score
     if($compareChoice == "Menang"){
       $message = "Bot Menang!";
@@ -280,15 +278,15 @@ class Webhook extends CI_Controller {
       $message = "Bot Kalah!";
       $textMessageBuilder1 = new TextMessageBuilder($message);
 
-      $this->$CompScore++;
-      $this->tebakkode_m->set_comScore($this->$CompScore);
+      $CompScore++;
+      //$this->tebakkode_m->set_comScore($this->$CompScore);
 
       $this->bot->replyMessage($replyToken, $textMessageBuilder1);
 
     }
     else {
       // create user score message
-      $message = 'Skormu '. $this->$CompScore . ' Skor Komp' . $this->user['score'];
+      $message = 'Skormu '. $CompScore . ' Skor Komp' . $this->user['score'];
       $textMessageBuilder1 = new TextMessageBuilder($message);
 
       // merge all message
