@@ -232,10 +232,11 @@ class Webhook extends CI_Controller {
   public function sendChoice($replyToken){
 
     $opsi = ["Gunting","Kertas","Batu","Lihat Score"];
+    $opsiText = ["Kamu Mengeluarkan Gunting","Kamu Mengeluarkan Kertas","Kamu Mengeluarkan Batu","Lihat Score"];
     $length = count($opsi);
 
     for($i = 0; $i<$length; $i++){
-      $options[] = new MessageTemplateActionBuilder($opsi[$i],$opsi[$i]);
+      $options[] = new MessageTemplateActionBuilder($opsi[$i],$opsiText[$i]);
     } 
 
     // prepare button template

@@ -9,10 +9,6 @@ class Tebakkode_m extends CI_Model {
     $this->load->database();
   }
 
-  // function set_comScore($comScore) {
-  //   $this->comScore = $comScore;
-  // }
-
   function get_comScore(){
     return $this->comScore;
   }
