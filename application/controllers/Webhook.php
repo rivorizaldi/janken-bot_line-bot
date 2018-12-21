@@ -254,12 +254,13 @@ class Webhook extends CI_Controller {
 
     //$compareChoice = $this->tebakkode_m->compareChoice($message);
 
-    $choice = ["Gunting","Kertas","Batu"];
-
-    $compChoice = $choice[mt_rand(0,2)];
+   
 
     switch($playerChoice) {
       case "Kamu Mengeluarkan Gunting":
+      $choice = ["Gunting","Kertas","Batu"];
+
+      $compChoice = $choice[mt_rand(0,2)];
         $result = $compChoice == "Gunting" ? "Seri" : ($compChoice == "Batu" ? "Menang" : "Kalah");
         $message = $result == "Seri" ? "Bot Mengeluarkan Gunting, Seri" : ($result == "Menang" ? "Bot Mengeluarkan Batu, Bot Menang" : "Bot Mengeluarkan Kertas, Bot Kalah");
         $textMessageBuilder1 = new TextMessageBuilder($message);
@@ -271,6 +272,9 @@ class Webhook extends CI_Controller {
         
         break;
       case "Kamu Mengeluarkan Batu":
+      $choice = ["Gunting","Kertas","Batu"];
+
+      $compChoice = $choice[mt_rand(0,2)];
         //$result = $compChoice == "Batu" ? "Seri" : ($compChoice == "Kertas" ? "Menang" : "Kalah");
         $result = $compChoice == "Gunting" ? "Seri" : ($compChoice == "Batu" ? "Menang" : "Kalah");
         $message = $result == "Seri" ? "Bot Mengeluarkan Gunting, Seri" : ($result == "Menang" ? "Bot Mengeluarkan Batu, Bot Menang" : "Bot Mengeluarkan Kertas, Bot Kalah");
@@ -282,6 +286,9 @@ class Webhook extends CI_Controller {
         $this->bot->replyMessage($replyToken, $textMessageBuilder1);
         break;
       case "Kamu Mengeluarkan Kertas":
+      $choice = ["Gunting","Kertas","Batu"];
+
+      $compChoice = $choice[mt_rand(0,2)];
         //$result = $compChoice == "Kertas" ? "Seri" : ($compChoice == "Gunting" ? "Menang" : "Kalah");
         $result = $compChoice == "Gunting" ? "Seri" : ($compChoice == "Batu" ? "Menang" : "Kalah");
         $message = $result == "Seri" ? "Bot Mengeluarkan Gunting, Seri" : ($result == "Menang" ? "Bot Mengeluarkan Batu, Bot Menang" : "Bot Mengeluarkan Kertas, Bot Kalah");
