@@ -257,73 +257,244 @@ class Webhook extends CI_Controller {
     if($compareChoice) { 
     switch($compareChoice){
       case "Bot Mengeluarkan Gunting, Seri":
-        $textMessageBuilder1 = new TextMessageBuilder($compareChoice);
 
         $this->user['score'] = $this->user['score'];
         $this->tebakkode_m->setScore($this->user['user_id'], $this->user['score']);
 
-        $this->bot->replyMessage($replyToken, $textMessageBuilder1);
+        $opsi = ["Gunting","Kertas","Batu","Lihat Score"];
+        $opsiText = ["Kamu Mengeluarkan Gunting","Kamu Mengeluarkan Kertas","Kamu Mengeluarkan Batu","Lihat Score"];
+        $length = count($opsi);
+
+        for($i = 0; $i<$length; $i++){
+          $options[] = new MessageTemplateActionBuilder($opsi[$i],$opsiText[$i]);
+        } 
+
+        // prepare button template
+        $buttonTemplate = new ButtonTemplateBuilder(null, 'Janken-Bot Game!', null, $options);
+      
+        // build message
+        $textMessageBuilder1 = new TextMessageBuilder($compareChoice);
+        $messageBuilder = new TemplateMessageBuilder("Gunakan mobile app untuk melihat soal", $buttonTemplate);
+
+        //merge all message
+        $multiMessageBuilder = new MultiMessageBuilder();
+        $multiMessageBuilder->add($textMessageBuilder1);
+        $multiMessageBuilder->add($messageBuilder);
+
+        $this->bot->replyMessage($replyToken, $multiMessageBuilder);
+        
         break;
-      case "Bot Mengeluarkan Batu, Seri":
-        $textMessageBuilder1 = new TextMessageBuilder($compareChoice);
+        case "Bot Mengeluarkan Batu, Seri":
 
-        $this->user['score'] = $this->user['score'];
-        $this->tebakkode_m->setScore($this->user['user_id'], $this->user['score']);
+          $this->user['score'] = $this->user['score'];
+          $this->tebakkode_m->setScore($this->user['user_id'], $this->user['score']);
 
-        $this->bot->replyMessage($replyToken, $textMessageBuilder1);
+          $opsi = ["Gunting","Kertas","Batu","Lihat Score"];
+          $opsiText = ["Kamu Mengeluarkan Gunting","Kamu Mengeluarkan Kertas","Kamu Mengeluarkan Batu","Lihat Score"];
+          $length = count($opsi);
+  
+          for($i = 0; $i<$length; $i++){
+            $options[] = new MessageTemplateActionBuilder($opsi[$i],$opsiText[$i]);
+          } 
+  
+          // prepare button template
+          $buttonTemplate = new ButtonTemplateBuilder(null, 'Janken-Bot Game!', null, $options);
+        
+          // build message
+          $textMessageBuilder1 = new TextMessageBuilder($compareChoice);
+          $messageBuilder = new TemplateMessageBuilder("Gunakan mobile app untuk melihat soal", $buttonTemplate);
+  
+          //merge all message
+          $multiMessageBuilder = new MultiMessageBuilder();
+          $multiMessageBuilder->add($textMessageBuilder1);
+          $multiMessageBuilder->add($messageBuilder);
+  
+          $this->bot->replyMessage($replyToken, $multiMessageBuilder);
         break;
       case "Bot Mengeluarkan Kertas, Seri":
-        $textMessageBuilder1 = new TextMessageBuilder($compareChoice);
 
         $this->user['score'] = $this->user['score'];
         $this->tebakkode_m->setScore($this->user['user_id'], $this->user['score']);
 
-        $this->bot->replyMessage($replyToken, $textMessageBuilder1);
+        $opsi = ["Gunting","Kertas","Batu","Lihat Score"];
+        $opsiText = ["Kamu Mengeluarkan Gunting","Kamu Mengeluarkan Kertas","Kamu Mengeluarkan Batu","Lihat Score"];
+        $length = count($opsi);
+
+        for($i = 0; $i<$length; $i++){
+          $options[] = new MessageTemplateActionBuilder($opsi[$i],$opsiText[$i]);
+        } 
+
+        // prepare button template
+        $buttonTemplate = new ButtonTemplateBuilder(null, 'Janken-Bot Game!', null, $options);
+      
+        // build message
+        $textMessageBuilder1 = new TextMessageBuilder($compareChoice);
+        $messageBuilder = new TemplateMessageBuilder("Gunakan mobile app untuk melihat soal", $buttonTemplate);
+
+        //merge all message
+        $multiMessageBuilder = new MultiMessageBuilder();
+        $multiMessageBuilder->add($textMessageBuilder1);
+        $multiMessageBuilder->add($messageBuilder);
+
+        $this->bot->replyMessage($replyToken, $multiMessageBuilder);
         break;
       case "Bot Mengeluarkan Gunting, Bot Menang":
+
+        $this->tebakkode_m->$comScore++;
+        $opsi = ["Gunting","Kertas","Batu","Lihat Score"];
+        $opsiText = ["Kamu Mengeluarkan Gunting","Kamu Mengeluarkan Kertas","Kamu Mengeluarkan Batu","Lihat Score"];
+        $length = count($opsi);
+
+        for($i = 0; $i<$length; $i++){
+          $options[] = new MessageTemplateActionBuilder($opsi[$i],$opsiText[$i]);
+        } 
+
+        // prepare button template
+        $buttonTemplate = new ButtonTemplateBuilder(null, 'Janken-Bot Game!', null, $options);
+      
+        // build message
         $textMessageBuilder1 = new TextMessageBuilder($compareChoice);
+        $messageBuilder = new TemplateMessageBuilder("Gunakan mobile app untuk melihat soal", $buttonTemplate);
 
-        $this->user['score']++;
-        $this->tebakkode_m->setScore($this->user['user_id'], $this->user['score']);
+        //merge all message
+        $multiMessageBuilder = new MultiMessageBuilder();
+        $multiMessageBuilder->add($textMessageBuilder1);
+        $multiMessageBuilder->add($messageBuilder);
 
-        $this->bot->replyMessage($replyToken, $textMessageBuilder1);
+        $this->bot->replyMessage($replyToken, $multiMessageBuilder);
         break;
       case "Bot Mengeluarkan Batu, Bot Menang":
+
+        $this->tebakkode_m->$comScore++;
+
+        $opsi = ["Gunting","Kertas","Batu","Lihat Score"];
+        $opsiText = ["Kamu Mengeluarkan Gunting","Kamu Mengeluarkan Kertas","Kamu Mengeluarkan Batu","Lihat Score"];
+        $length = count($opsi);
+
+        for($i = 0; $i<$length; $i++){
+          $options[] = new MessageTemplateActionBuilder($opsi[$i],$opsiText[$i]);
+        } 
+
+        // prepare button template
+        $buttonTemplate = new ButtonTemplateBuilder(null, 'Janken-Bot Game!', null, $options);
+      
+        // build message
         $textMessageBuilder1 = new TextMessageBuilder($compareChoice);
+        $messageBuilder = new TemplateMessageBuilder("Gunakan mobile app untuk melihat soal", $buttonTemplate);
 
-        $this->user['score']++;
-        $this->tebakkode_m->setScore($this->user['user_id'], $this->user['score']);
+        //merge all message
+        $multiMessageBuilder = new MultiMessageBuilder();
+        $multiMessageBuilder->add($textMessageBuilder1);
+        $multiMessageBuilder->add($messageBuilder);
 
-        $this->bot->replyMessage($replyToken, $textMessageBuilder1);
+        $this->bot->replyMessage($replyToken, $multiMessageBuilder);
         break;
       case "Bot Mengeluarkan Kertas, Bot Menang":
+
+        $this->tebakkode_m->$comScore++;
+
+        $opsi = ["Gunting","Kertas","Batu","Lihat Score"];
+        $opsiText = ["Kamu Mengeluarkan Gunting","Kamu Mengeluarkan Kertas","Kamu Mengeluarkan Batu","Lihat Score"];
+        $length = count($opsi);
+
+        for($i = 0; $i<$length; $i++){
+          $options[] = new MessageTemplateActionBuilder($opsi[$i],$opsiText[$i]);
+        } 
+
+        // prepare button template
+        $buttonTemplate = new ButtonTemplateBuilder(null, 'Janken-Bot Game!', null, $options);
+      
+        // build message
         $textMessageBuilder1 = new TextMessageBuilder($compareChoice);
+        $messageBuilder = new TemplateMessageBuilder("Gunakan mobile app untuk melihat soal", $buttonTemplate);
+
+        //merge all message
+        $multiMessageBuilder = new MultiMessageBuilder();
+        $multiMessageBuilder->add($textMessageBuilder1);
+        $multiMessageBuilder->add($messageBuilder);
+
+        $this->bot->replyMessage($replyToken, $multiMessageBuilder);
+        break;
+      case "Bot Mengeluarkan Gunting, Bot Kalah":
+        
+        $this->user['score']++;
+        $this->tebakkode_m->setScore($this->user['user_id'], $this->user['score']);
+
+        $opsi = ["Gunting","Kertas","Batu","Lihat Score"];
+        $opsiText = ["Kamu Mengeluarkan Gunting","Kamu Mengeluarkan Kertas","Kamu Mengeluarkan Batu","Lihat Score"];
+        $length = count($opsi);
+
+        for($i = 0; $i<$length; $i++){
+          $options[] = new MessageTemplateActionBuilder($opsi[$i],$opsiText[$i]);
+        } 
+
+        // prepare button template
+        $buttonTemplate = new ButtonTemplateBuilder(null, 'Janken-Bot Game!', null, $options);
+      
+        // build message
+        $textMessageBuilder1 = new TextMessageBuilder($compareChoice);
+        $messageBuilder = new TemplateMessageBuilder("Gunakan mobile app untuk melihat soal", $buttonTemplate);
+
+        //merge all message
+        $multiMessageBuilder = new MultiMessageBuilder();
+        $multiMessageBuilder->add($textMessageBuilder1);
+        $multiMessageBuilder->add($messageBuilder);
+
+        $this->bot->replyMessage($replyToken, $multiMessageBuilder);
+        break;
+      case "Bot Mengeluarkan Batu, Bot Kalah":
 
         $this->user['score']++;
         $this->tebakkode_m->setScore($this->user['user_id'], $this->user['score']);
 
-        $this->bot->replyMessage($replyToken, $textMessageBuilder1);
-        break;
-      case "Bot Mengeluarkan Gunting, Bot Kalah":
+        $opsi = ["Gunting","Kertas","Batu","Lihat Score"];
+        $opsiText = ["Kamu Mengeluarkan Gunting","Kamu Mengeluarkan Kertas","Kamu Mengeluarkan Batu","Lihat Score"];
+        $length = count($opsi);
+
+        for($i = 0; $i<$length; $i++){
+          $options[] = new MessageTemplateActionBuilder($opsi[$i],$opsiText[$i]);
+        } 
+
+        // prepare button template
+        $buttonTemplate = new ButtonTemplateBuilder(null, 'Janken-Bot Game!', null, $options);
+      
+        // build message
         $textMessageBuilder1 = new TextMessageBuilder($compareChoice);
-        
-        $this->tebakkode_m->$comScore++;
+        $messageBuilder = new TemplateMessageBuilder("Gunakan mobile app untuk melihat soal", $buttonTemplate);
 
-        $this->bot->replyMessage($replyToken, $textMessageBuilder1);
-        break;
-      case "Bot Mengeluarkan Batu, Bot Kalah":
-        $textMessageBuilder1 = new TextMessageBuilder($compareChoice);
+        //merge all message
+        $multiMessageBuilder = new MultiMessageBuilder();
+        $multiMessageBuilder->add($textMessageBuilder1);
+        $multiMessageBuilder->add($messageBuilder);
 
-        $this->tebakkode_m->$comScore++;
-
-        $this->bot->replyMessage($replyToken, $textMessageBuilder1);
+        $this->bot->replyMessage($replyToken, $multiMessageBuilder);
         break;
       case "Bot Mengeluarkan Kertas, Bot Kalah":
+
+        $this->user['score']++;
+        $this->tebakkode_m->setScore($this->user['user_id'], $this->user['score']);
+
+        $opsi = ["Gunting","Kertas","Batu","Lihat Score"];
+        $opsiText = ["Kamu Mengeluarkan Gunting","Kamu Mengeluarkan Kertas","Kamu Mengeluarkan Batu","Lihat Score"];
+        $length = count($opsi);
+
+        for($i = 0; $i<$length; $i++){
+          $options[] = new MessageTemplateActionBuilder($opsi[$i],$opsiText[$i]);
+        } 
+
+        // prepare button template
+        $buttonTemplate = new ButtonTemplateBuilder(null, 'Janken-Bot Game!', null, $options);
+      
+        // build message
         $textMessageBuilder1 = new TextMessageBuilder($compareChoice);
+        $messageBuilder = new TemplateMessageBuilder("Gunakan mobile app untuk melihat soal", $buttonTemplate);
 
-        $this->tebakkode_m->$comScore++;
+        //merge all message
+        $multiMessageBuilder = new MultiMessageBuilder();
+        $multiMessageBuilder->add($textMessageBuilder1);
+        $multiMessageBuilder->add($messageBuilder);
 
-        $this->bot->replyMessage($replyToken, $textMessageBuilder1);
+        $this->bot->replyMessage($replyToken, $multiMessageBuilder);
         break;
     }
   } 
@@ -340,49 +511,6 @@ class Webhook extends CI_Controller {
       $this->bot->replyMessage($replyToken, $multiMessageBuilder);
     }
     
-    // //if answer is true, increment score
-    // if($compareChoice == "Bot Mengeluarkan Batu, Bot Menang"){
-    //   $message = "Bot Mengeluarkan Batu, Bot Menang";
-    //   $textMessageBuilder1 = new TextMessageBuilder($message);
-
-    //   $this->tebakkode_m->$comScore++;
-
-    //   $this->bot->replyMessage($replyToken, $textMessageBuilder1);
-
-    // }
-    // elseif($compareChoice == "Bot Mengeluarkan Gunting, Seri"){
-    //   $message = "Bot Mengeluarkan Gunting, Seri!";
-    //   $textMessageBuilder1 = new TextMessageBuilder($message);
-
-    //   $this->user['score'] = $this->user['score'];
-    //   $this->tebakkode_m->setScore($this->user['user_id'], $this->user['score']);
-
-    //   $this->bot->replyMessage($replyToken, $textMessageBuilder1);
-
-    // }
-    // elseif($compareChoice == "Bot Mengeluarkan Kertas Bot Kalah"){
-    //   $message = "Bot Kalah!";
-    //   $textMessageBuilder1 = new TextMessageBuilder($message);
-
-    //   $this->user['score']++;
-    //   $this->tebakkode_m->setScore($this->user['user_id'], $this->user['score']);
-    //   //$this->tebakkode_m->set_comScore($this->$CompScore);
-
-    //   $this->bot->replyMessage($replyToken, $textMessageBuilder1);
-
-    // }
-    // else {
-    //   // create user score message
-    //   $message = 'Skormu '. $this->tebakkode_m->get_comScore() . ' Skor Komp' . $this->user['score'];
-    //   $textMessageBuilder1 = new TextMessageBuilder($message);
-
-    //   // merge all message
-    //   $multiMessageBuilder = new MultiMessageBuilder();
-    //   $multiMessageBuilder->add($textMessageBuilder1);
-
-    //   // send reply message
-    //   $this->bot->replyMessage($replyToken, $multiMessageBuilder);
-    // }
   }
 
 }
