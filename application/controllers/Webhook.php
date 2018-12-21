@@ -252,7 +252,7 @@ class Webhook extends CI_Controller {
 
   private function checkResult($playerChoice, $replyToken){
 
-    $compareChoice = $this->tebakkode_m->compareChoice($message);
+    $compareChoice = $this->tebakkode_m->compareChoice($playerChoice);
 
     switch($compareChoice){
       case "Bot Mengeluarkan Gunting, Seri":
