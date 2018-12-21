@@ -100,8 +100,7 @@ class Webhook extends CI_Controller {
       $message  = "Hai, " . $profile['displayName'] . "!\n";
       $message2 = "Pilih Opsi 1. Mulai Bermain, untuk memulai permainan.\n";
       $message2 .= "pilih Opsi 2. Panduan, untuk mengetahui tata cara permainan.\n";
-      $message2 .= "Selamat Bermain! " . $code["wink"]."\n\n";
-      $message2 .= "P.S : Kamu tidak perlu membalas pesan dari bot secara manual, cukup memilih pilihan yang sudah tersedia.";
+      $message2 .= "Selamat Bermain! " . $code["wink"];
       $textMessageBuilder = new TextMessageBuilder($message);
       $textMessageBuilder2 = new TextMessageBuilder($message2);
 
@@ -160,8 +159,8 @@ class Webhook extends CI_Controller {
       $message = "Kamu tinggal memilih salah satu diantara 3 pilihan:\n";
       $message .= "Gunting Kertas dan Batu.\n";
       $message .= "Setelah memilih, pilihan kamu akan di bandingkan oleh pilihan bot.\n";
-      $message .= "Kamu akan mendaatkan score jika pilihan mu dapat mengalahkan pilihan bot.\n";
-      
+      $message .= "Kamu akan mendapatkan score jika pilihan mu dapat mengalahkan pilihan bot.\n\n";
+      $message2 .= "P.S : Kamu tidak perlu membalas pesan dari bot secara manual, cukup memilih pilihan yang sudah tersedia.".$code["wink"];
       $textMessageBuilder = new TextMessageBuilder($message);
 
       // merge all message
