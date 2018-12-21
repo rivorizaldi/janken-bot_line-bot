@@ -44,15 +44,15 @@ class Tebakkode_m extends CI_Model {
     $compChoice = $choice[mt_rand(0,2)];
 
     switch($playerChoice) {
-      case "Gunting":
+      case "Kamu Mengeluarkan Gunting":
         $result = $compChoice == "Gunting" ? "Seri" : ($compChoice == "Batu" ? "Menang" : "Kalah");
         return $result;
         break;
-      case "Batu":
+      case "Kamu Mengeluarkan Batu":
         $result = $compChoice == "Batu" ? "Seri" : ($compChoice == "Kertas" ? "Menang" : "Kalah");
         return $result;
         break;
-      case "Kertas":
+      case "Kamu Mengeluarkan Kertas":
         $result = $compChoice == "Kertas" ? "Seri" : ($compChoice == "Gunting" ? "Menang" : "Kalah");
         return $result;
         break;
