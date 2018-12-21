@@ -17,6 +17,7 @@ class Webhook extends CI_Controller {
   private $user;
   private $CompScore = 0;
 
+
   function __construct()
   {
     parent::__construct();
@@ -280,13 +281,14 @@ class Webhook extends CI_Controller {
       $textMessageBuilder1 = new TextMessageBuilder($message);
 
       $this->$CompScore++;
+      $this->tebakkode_m->set_comScore($this->$CompScore);
 
       $this->bot->replyMessage($replyToken, $textMessageBuilder1);
 
     }
     else {
       // create user score message
-      $message = 'Skormu '. $this->user['score'] . ' Skor Komp' . $this->$CompScore;
+      $message = 'Skormu '. $this->user['score'] . ' Skor Komp' . $this->tebakkode_m->get_comScore();
       $textMessageBuilder1 = new TextMessageBuilder($message);
 
       // merge all message

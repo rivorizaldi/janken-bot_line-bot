@@ -2,20 +2,20 @@
 
 class Tebakkode_m extends CI_Model {
 
-  //private $compChoice;
+  private $comScore;
 
   function __construct(){
     parent::__construct();
     $this->load->database();
   }
 
-  // function set_compChoice($compChoice) {
-  //   $this->compChoice = $compChoice;
-  // }
+  function set_comScore($comScore) {
+    $this->comScore = $comScore;
+  }
 
-  // function get_compChoice(){
-  //   return $this->compChoice;
-  // }
+  function get_comScore(){
+    return $this->comScore;
+  }
 
   // Events Log
   function log_events($signature, $body)
@@ -40,16 +40,6 @@ class Tebakkode_m extends CI_Model {
     ->insert('users');
 
   return $this->db->insert_id();
-  }
-
-  // Question
-  function getQuestion($questionNum){
-    $data = $this->db->where('number', $questionNum)
-    ->get('questions')
-    ->row_array();
-
-  if(count($data)>0) return $data;
-  return false;
   }
 
   function compareChoice($playerChoice){
