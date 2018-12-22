@@ -15,7 +15,6 @@ class Webhook extends CI_Controller {
   private $events;
   private $signature;
   private $user;
-  public $comScore;
 
   function __construct()
   {
@@ -50,15 +49,12 @@ class Webhook extends CI_Controller {
 
     if(is_array($this->events['events'])){
 
-      
-
       foreach ($this->events['events'] as $event){
         // your code here
         if(! isset($event['source']['userId'])) continue;
  
         // get user data from database
         $this->user = $this->tebakkode_m->getUser($event['source']['userId']);
-        $this->compScore = 0;
 
         // if user not registered
         if(!$this->user) $this->followCallback($event);
@@ -139,7 +135,7 @@ class Webhook extends CI_Controller {
       {
         // reset score
         $this->tebakkode_m->setScore($this->user['user_id'], 0);
-        $this->tebakkode_m->setScoreComp($this->user['user_id'], 0);
+        //$this->tebakkode_m->setScoreComp($this->user['user_id'], 0);
 
         // send question no.1
         $this->sendChoice($event['replyToken']);
