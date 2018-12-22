@@ -345,7 +345,7 @@ class Webhook extends CI_Controller {
       case "Bot Mengeluarkan Gunting, Bot Menang":
 
         $this->user['scoreComp']++;
-        $this->tebakkode_m->setScore($this->user['user_id'], $this->user['scoreComp']);
+        $this->tebakkode_m->setScoreComp($this->user['user_id'], $this->user['scoreComp']);
 
         $opsi = ["Gunting","Kertas","Batu","Lihat Score"];
         $opsiText = ["Kamu Mengeluarkan Gunting","Kamu Mengeluarkan Kertas","Kamu Mengeluarkan Batu","Lihat Score"];
@@ -372,7 +372,7 @@ class Webhook extends CI_Controller {
       case "Bot Mengeluarkan Batu, Bot Menang":
 
         $this->user['scoreComp']++;
-        $this->tebakkode_m->setScore($this->user['user_id'], $this->user['scoreComp']);
+        $this->tebakkode_m->setScoreComp($this->user['user_id'], $this->user['scoreComp']);
 
         $opsi = ["Gunting","Kertas","Batu","Lihat Score"];
         $opsiText = ["Kamu Mengeluarkan Gunting","Kamu Mengeluarkan Kertas","Kamu Mengeluarkan Batu","Lihat Score"];
@@ -399,7 +399,7 @@ class Webhook extends CI_Controller {
       case "Bot Mengeluarkan Kertas, Bot Menang":
 
         $this->user['scoreComp']++;
-        $this->tebakkode_m->setScore($this->user['user_id'], $this->user['scoreComp']);
+        $this->tebakkode_m->setScoreComp($this->user['user_id'], $this->user['scoreComp']);
 
         $opsi = ["Gunting","Kertas","Batu","Lihat Score"];
         $opsiText = ["Kamu Mengeluarkan Gunting","Kamu Mengeluarkan Kertas","Kamu Mengeluarkan Batu","Lihat Score"];
