@@ -15,7 +15,7 @@ class Webhook extends CI_Controller {
   private $events;
   private $signature;
   private $user;
-  public $compScore;
+  private $comScore;
 
   function __construct()
   {
@@ -50,7 +50,7 @@ class Webhook extends CI_Controller {
 
     if(is_array($this->events['events'])){
 
-      $this->compScore = 0;
+      
 
       foreach ($this->events['events'] as $event){
         // your code here
@@ -58,7 +58,8 @@ class Webhook extends CI_Controller {
  
         // get user data from database
         $this->user = $this->tebakkode_m->getUser($event['source']['userId']);
- 
+        $this->compScore = 0;
+
         // if user not registered
         if(!$this->user) $this->followCallback($event);
         else {
@@ -138,7 +139,7 @@ class Webhook extends CI_Controller {
       {
         // reset score
         $this->tebakkode_m->setScore($this->user['user_id'], 0);
-
+        $this->tebakkode_m->set_comScore(0);
         // send question no.1
         $this->sendChoice($event['replyToken']);
       } 
@@ -346,7 +347,8 @@ class Webhook extends CI_Controller {
         break;
       case "Bot Mengeluarkan Gunting, Bot Menang":
 
-      $this->tebakkode_m->set_comScore();
+        $this->comScore++;
+        $this->tebakkode_m->set_comScore($this->comScore);
 
         $opsi = ["Gunting","Kertas","Batu","Lihat Score"];
         $opsiText = ["Kamu Mengeluarkan Gunting","Kamu Mengeluarkan Kertas","Kamu Mengeluarkan Batu","Lihat Score"];
@@ -372,7 +374,8 @@ class Webhook extends CI_Controller {
         break;
       case "Bot Mengeluarkan Batu, Bot Menang":
 
-      $this->tebakkode_m->set_comScore();
+        $this->comScore++;
+        $this->tebakkode_m->set_comScore($this->comScore);
 
         $opsi = ["Gunting","Kertas","Batu","Lihat Score"];
         $opsiText = ["Kamu Mengeluarkan Gunting","Kamu Mengeluarkan Kertas","Kamu Mengeluarkan Batu","Lihat Score"];
@@ -398,7 +401,8 @@ class Webhook extends CI_Controller {
         break;
       case "Bot Mengeluarkan Kertas, Bot Menang":
 
-        $this->tebakkode_m->set_comScore();
+        $this->comScore++;
+        $this->tebakkode_m->set_comScore($this->comScore);
 
         $opsi = ["Gunting","Kertas","Batu","Lihat Score"];
         $opsiText = ["Kamu Mengeluarkan Gunting","Kamu Mengeluarkan Kertas","Kamu Mengeluarkan Batu","Lihat Score"];

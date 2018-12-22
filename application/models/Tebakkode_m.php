@@ -2,15 +2,15 @@
 
 class Tebakkode_m extends CI_Model {
 
-  public $comScore = 0;
+  public $comScore;
 
   function __construct(){
     parent::__construct();
     $this->load->database();
   }
 
-  function set_comScore(){
-    return $this->comScore++;
+  function set_comScore($s){
+    $this->comScore = $s;
   }
 
   function get_comScore(){
