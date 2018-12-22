@@ -14,7 +14,7 @@ class Tebakkode_m extends CI_Model {
   }
 
   function get_comScore(){
-    return $this->comScore;
+    return $this->comScore++;
   }
 
   // Events Log
