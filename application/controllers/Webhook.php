@@ -139,7 +139,8 @@ class Webhook extends CI_Controller {
       {
         // reset score
         $this->tebakkode_m->setScore($this->user['user_id'], 0);
-        $this->tebakkode_m->set_comScore(0);
+        $this->tebakkode_m->setScoreComp($this->user['user_id'], 0);
+
         // send question no.1
         $this->sendChoice($event['replyToken']);
       } 
@@ -347,8 +348,8 @@ class Webhook extends CI_Controller {
         break;
       case "Bot Mengeluarkan Gunting, Bot Menang":
 
-        $this->comScore++;
-        $this->tebakkode_m->set_comScore();
+        $this->user['scoreComp']++;
+        $this->tebakkode_m->setScore($this->user['user_id'], $this->user['scoreComp']);
 
         $opsi = ["Gunting","Kertas","Batu","Lihat Score"];
         $opsiText = ["Kamu Mengeluarkan Gunting","Kamu Mengeluarkan Kertas","Kamu Mengeluarkan Batu","Lihat Score"];
@@ -374,8 +375,8 @@ class Webhook extends CI_Controller {
         break;
       case "Bot Mengeluarkan Batu, Bot Menang":
 
-        $this->comScore++;
-        $this->tebakkode_m->set_comScore();
+        $this->user['scoreComp']++;
+        $this->tebakkode_m->setScore($this->user['user_id'], $this->user['scoreComp']);
 
         $opsi = ["Gunting","Kertas","Batu","Lihat Score"];
         $opsiText = ["Kamu Mengeluarkan Gunting","Kamu Mengeluarkan Kertas","Kamu Mengeluarkan Batu","Lihat Score"];
@@ -401,8 +402,8 @@ class Webhook extends CI_Controller {
         break;
       case "Bot Mengeluarkan Kertas, Bot Menang":
 
-        $this->comScore++;
-        $this->tebakkode_m->set_comScore();
+        $this->user['scoreComp']++;
+        $this->tebakkode_m->setScore($this->user['user_id'], $this->user['scoreComp']);
 
         $opsi = ["Gunting","Kertas","Batu","Lihat Score"];
         $opsiText = ["Kamu Mengeluarkan Gunting","Kamu Mengeluarkan Kertas","Kamu Mengeluarkan Batu","Lihat Score"];

@@ -9,14 +9,6 @@ class Tebakkode_m extends CI_Model {
     $this->load->database();
   }
 
-  function set_comScore(){
-    $this->comScore++;
-  }
-
-  function get_comScore(){
-    return $this->comScore++;
-  }
-
   // Events Log
   function log_events($signature, $body)
   {
@@ -66,6 +58,14 @@ class Tebakkode_m extends CI_Model {
   function setScore($user_id, $score){
     $this->db->set('score', $score)
     ->where('user_id', $user_id)
+    ->update('users');
+
+  return $this->db->affected_rows();
+  }
+
+  function setScoreComp($user_id, $score){
+    $this->db->set('scoreComp', $score)
+    ->where('user_id',$user_id)
     ->update('users');
 
   return $this->db->affected_rows();
