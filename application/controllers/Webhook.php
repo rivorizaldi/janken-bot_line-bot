@@ -49,7 +49,7 @@ class Webhook extends CI_Controller {
     
 
     if(is_array($this->events['events'])){
-      
+
       $this->compScore = 0;
 
       foreach ($this->events['events'] as $event){
@@ -346,7 +346,7 @@ class Webhook extends CI_Controller {
         break;
       case "Bot Mengeluarkan Gunting, Bot Menang":
 
-        $this->compScore = $this->compScore + 1;
+      $this->tebakkode_m->set_comScore();
 
         $opsi = ["Gunting","Kertas","Batu","Lihat Score"];
         $opsiText = ["Kamu Mengeluarkan Gunting","Kamu Mengeluarkan Kertas","Kamu Mengeluarkan Batu","Lihat Score"];
@@ -372,7 +372,7 @@ class Webhook extends CI_Controller {
         break;
       case "Bot Mengeluarkan Batu, Bot Menang":
 
-        $this->compScore = $this->compScore + 1;
+      $this->tebakkode_m->set_comScore();
 
         $opsi = ["Gunting","Kertas","Batu","Lihat Score"];
         $opsiText = ["Kamu Mengeluarkan Gunting","Kamu Mengeluarkan Kertas","Kamu Mengeluarkan Batu","Lihat Score"];
@@ -398,7 +398,7 @@ class Webhook extends CI_Controller {
         break;
       case "Bot Mengeluarkan Kertas, Bot Menang":
 
-        $this->compScore = $this->compScore + 1;
+        $this->tebakkode_m->set_comScore();
 
         $opsi = ["Gunting","Kertas","Batu","Lihat Score"];
         $opsiText = ["Kamu Mengeluarkan Gunting","Kamu Mengeluarkan Kertas","Kamu Mengeluarkan Batu","Lihat Score"];
@@ -507,7 +507,7 @@ class Webhook extends CI_Controller {
   } 
     else {
       // create user score message
-      $message = 'Skormu '. $this->user['score'] . ' Skor Bot ' . $this->compScore;
+      $message = 'Skormu '. $this->user['score'] . ' Skor Bot ' . $this->tebakkode_m->get_comScore();
       $textMessageBuilder1 = new TextMessageBuilder($message);
 
       $opsi = ["Gunting","Kertas","Batu","Lihat Score"];
