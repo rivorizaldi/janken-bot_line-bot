@@ -62,7 +62,7 @@ class Tebakkode_m extends CI_Model {
   }
 
   function setScoreComp($user_id, $score){
-    $this->db->set('scoreComp', $score)
+    $this->db->set('scorecomp', $score)
     ->where('user_id',$user_id)
     ->update('users');
 
