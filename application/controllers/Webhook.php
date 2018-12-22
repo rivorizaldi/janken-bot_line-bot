@@ -15,7 +15,7 @@ class Webhook extends CI_Controller {
   private $events;
   private $signature;
   private $user;
-  public $comScore = 0;
+  public $comScore;
 
   function __construct()
   {
@@ -511,7 +511,7 @@ class Webhook extends CI_Controller {
   } 
     else {
       // create user score message
-      $message = 'Skormu '. $this->user['score'] . ' Skor Bot ' . $this->comScore++;
+      $message = 'Skormu '. $this->user['score'] . ' Skor Bot ' . $this->tebakkode_m->get_comScore();
       $textMessageBuilder1 = new TextMessageBuilder($message);
 
       $opsi = ["Gunting","Kertas","Batu","Lihat Score"];
