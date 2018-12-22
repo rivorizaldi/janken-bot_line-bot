@@ -348,7 +348,7 @@ class Webhook extends CI_Controller {
       case "Bot Mengeluarkan Gunting, Bot Menang":
 
         $this->comScore++;
-        $this->tebakkode_m->set_comScore($this->comScore);
+        $this->tebakkode_m->set_comScore();
 
         $opsi = ["Gunting","Kertas","Batu","Lihat Score"];
         $opsiText = ["Kamu Mengeluarkan Gunting","Kamu Mengeluarkan Kertas","Kamu Mengeluarkan Batu","Lihat Score"];
@@ -375,7 +375,7 @@ class Webhook extends CI_Controller {
       case "Bot Mengeluarkan Batu, Bot Menang":
 
         $this->comScore++;
-        $this->tebakkode_m->set_comScore($this->comScore);
+        $this->tebakkode_m->set_comScore();
 
         $opsi = ["Gunting","Kertas","Batu","Lihat Score"];
         $opsiText = ["Kamu Mengeluarkan Gunting","Kamu Mengeluarkan Kertas","Kamu Mengeluarkan Batu","Lihat Score"];
@@ -402,7 +402,7 @@ class Webhook extends CI_Controller {
       case "Bot Mengeluarkan Kertas, Bot Menang":
 
         $this->comScore++;
-        $this->tebakkode_m->set_comScore($this->comScore);
+        $this->tebakkode_m->set_comScore();
 
         $opsi = ["Gunting","Kertas","Batu","Lihat Score"];
         $opsiText = ["Kamu Mengeluarkan Gunting","Kamu Mengeluarkan Kertas","Kamu Mengeluarkan Batu","Lihat Score"];
