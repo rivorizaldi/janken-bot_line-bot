@@ -135,9 +135,9 @@ class Webhook extends CI_Controller {
       {
         // reset score
         $this->tebakkode_m->setScore($this->user['user_id'], 0);
-        //$this->tebakkode_m->setScoreComp($this->user['user_id'], 0);
+        $this->tebakkode_m->setScoreComp($this->user['user_id'], 0);
 
-        // send question no.1
+        // send Choices
         $this->sendChoice($event['replyToken']);
       } 
       
