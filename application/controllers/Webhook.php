@@ -15,7 +15,7 @@ class Webhook extends CI_Controller {
   private $events;
   private $signature;
   private $user;
-  public $comScore;
+  public $comScore = 0;
 
   function __construct()
   {
