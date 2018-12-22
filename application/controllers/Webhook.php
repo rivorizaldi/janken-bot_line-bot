@@ -46,9 +46,12 @@ class Webhook extends CI_Controller {
     // debuging data
     file_put_contents('php://stderr', 'Body: '.$body);
 
-    $this->compScore = 0;
+    
 
     if(is_array($this->events['events'])){
+      
+      $this->compScore = 0;
+
       foreach ($this->events['events'] as $event){
         // your code here
         if(! isset($event['source']['userId'])) continue;
